@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>Git 최신 버전 설치 | yellowgreen</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial=1, user-scalable=yes"/>
+	<meta name="author" content="yellowgreen"/>
+	<meta name="keyword" content="yellowgreen, 연두, blog, 블로그, Git"/>
+	<meta name="description" content="Git 최신 버전 직접 설치하기"/>
+	<meta property="og:title" content="Git 최신 버전 설치"/>
+	<meta property="og:description" content="Git 최신 버전 직접 설치하기"/>
+	<meta property="og:url" content="https://yellowgreen.ddns.net/blog/disable/git/"/>
+	<meta property="og:image" content="https://yellowgreen.ddns.net/media/opengraph.png"/>
+	<meta property="og:type" content="blog"/>
+	<link rel="canonical" href="https://yellowgreen.ddns.net/blog/disable/git/">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+	</style>
+	<script type="text/javascript" src="/data/jquery.js"></script>
+	<script type="text/javascript" src="/js/index.js"></script>
+	<script type="text/javascript" src="/js/writing.js"></script>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+
+
+
+
+
+<h1>Git 최신 버전 설치</h1>
+<div id="writingday">2021.08.30</div>
+<div id='notice'>
+	<p><b>Raspberry Pi OS</b> 기준으로 작성했습니다.</p>
+</div>
+
+<h2>Git</h2>
+<div><a href="https://linuxize.com/post/how-to-install-git-on-raspberry-pi/">https://linuxize.com/post/how-to-install-git-on-raspberry-pi/</a><br/>
+<span class="command">git config credential.helper store</span> : 반영구적 암호 저장<br/>
+<span class="command">git config credential.helper cache</span> : 일정 시간 암호 저장 (기본 15분)<br/>
+- <span class="command">git config credential.helper 'cache --timeout=3600'</span> 3600초 연장<br/>
+<span class="command">git config --unset credential.helper</span> : 제거<br/>
+<br/>
+위 모든 명령어에 <span class="command">--global</span> 옵션을 주면 모든 프로젝트에 적용된다.</div>
+
+
+
+
+
+</body>
+</html>
