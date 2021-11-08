@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>Downloads | yellowgreen</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial=1, user-scalable=yes"/>
+	<meta name="author" content="yellowgreen"/>
+	<meta name="keyword" content="yellowgreen, download, 다운로드"/>
+	<meta name="description" content="Data room"/>
+	<meta property="og:title" content="Downloads"/>
+	<meta property="og:description" content="Data room"/>
+	<meta property="og:url" content="https://yellowgreen.ddns.net/downloads/"/>
+	<meta property="og:image" content="https://yellowgreen.ddns.net/media/opengraph.png"/>
+	<meta property="og:type" content="blog"/>
+	<link rel="canonical" href="https://yellowgreen.ddns.net/downloads/">
+	<meta name="robots" content="noindex,nofollow"/>
+	<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+#time {
+	border: 1px solid var(--bdcolor);
+	display: block;
+	margin: auto;
+	margin-top: .5em;
+	padding: .5em;
+	width: 15em;
+	text-align: center;
+} tbody tr> td:not(:nth-child(2)) {
+	text-align: center;
+} tbody tr> td:first-child {
+	width: 2em;
+} tbody tr> td:last-child {
+	width: 15%;
+} tbody tr> td:nth-child(3) {
+	width: 25%;
+}
+	</style>
+	<script type="text/javascript" src="/data/jquery.js"></script>
+	<script type="text/javascript" src="/js/index.js"></script>
+	<script type="text/javascript" src="/js/downloads.js"></script>
+	<script type="text/javascript" src="/js/time.js"></script>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+
+
+
+
+
+<table>
+<!--	<colgroup>
+		<col width="5%"/>
+		<col width="55%"/>
+	</colgroup>
+-->	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col">Language</th>
+			<th scope="cor">Extension</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td scope="row">time</td>
+			<td scope="row">JavaScript</td>
+			<td scope="row">.zip</td3>
+		</tr>
+		<tr>
+			<td scope="row">temp</td>
+			<td scope="row">Bash</td>
+			<td scope="row"></td3>
+		</tr>
+	</tbody>
+</table>
+
+<hr/>
+
+<div time>
+	<p>- 현재 시간을 실시간으로 출력한다.</p>
+	<p>- .zip 내부에는 순수 JavaScript로 만든 파일과 jQuery로 만든 파일로 총 2개의 js파일이 있다.</p>
+	<p>- <span class="command">id="time</span> 위치에 출력되며, 출력 위치는 <span class="command">// Output Point</span> 부분에서 수정할 수 있다.</p>
+	<p>- 1초마다 출력되며, <span class="command">setTimeout()</span>에서 숫자를 수정하면 반복 시간이 바뀐다.</p>
+	<p>- <span class="command">// 12 hour format</span> 부분의 여러 줄 주석을 풀면 12시간 형식으로 출력된다.</p>
+	<p>- <span class="command">// Milliseconds</span> 부분의 여러 줄 주석을 풀면 밀리초까지 출력한다.</p>
+	<p>- 요일 형식을 바꾸고 싶다면 <span class="command">var week =</span> 부분을, 출력 순서를 바꾸고 싶다면 <span class="command">// HTML Code</span> 부분을 수정하면 된다.</p>
+	<p id="time">- 출력 결과는 <a href="/error/404/" title="404 Error Page">여기</a>서 볼 수 있다.</p>
+</div>
+
+<div temp>
+	<p>- 라즈베리 파이에서 CPU, GPU의 온도를 체크할 수 있는 Bash 스크립트 파일.</p>
+	<p>- <span class="command">sudo</span>를 사용한다.</p>
+	<p>- 3초마다 출력되며, <span class="command">sleep 3</span>에서 숫자를 수정하면 반복 시간이 바뀐다.</p>
+	<p>- 출력 결과는 홈 디렉토리에 temp.out이라는 이름으로 저장되며, 저장되는 위치와 이름을 바꾸고 싶다면 코드 내 <span class="command">~/temp.out</span> 부분을 수정하면 된다.</p>
+	<p>- 출력 예시 : <span class="command">2021.02.31 12:34:56 Temperature | CPU : 00.0'C | GPU : 00.000'C</span></p>
+</div>
+
+
+
+
+
+</body>
+</html>
