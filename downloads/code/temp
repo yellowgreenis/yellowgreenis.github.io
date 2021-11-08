@@ -1,0 +1,14 @@
+#!/bin/bash
+
+while :
+do
+	cpu=`sudo vcgencmd measure_temp`
+	cpu="${cpu#*=}"
+	gpu=`cat /sys/devices/virtual/thermal/thermal_zone0/temp`
+	gpu=`echo "$gpu" | rev | cut -b 4- | rev`.`echo "$gpu" | rev | cut -b -3 | rev`\'C
+
+	out="`date '+%Y.%m.%d %H:%M:%S'` Temperature | CPU : $cpu | GPU : $gpu"
+	echo "$out" | sudo tee -a ~/temp.out
+
+	sleep 3
+done
