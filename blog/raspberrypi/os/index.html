@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>[라즈베리 파이] OS 설치 및 설정 | yellowgreen</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial=1, user-scalable=yes"/>
+	<meta name="author" content="yellowgreen"/>
+	<meta name="keyword" content="yellowgreen, 연두, blog, 블로그, raspberry pi 4B, 라즈베리 파이 4B, Raspberry Pi OS, 라즈베리 파이 OS, Raspbian, 라즈비안"/>
+	<meta name="description" content="라즈베리 파이 4B에 각종 OS 설치 방법 & 라즈베리 파이 OS 설치하기"/>
+	<meta property="og:title" content="[라즈베리 파이] OS 설치 및 설정"/>
+	<meta property="og:description" content="라즈베리 파이 4B에 각종 OS 설치 방법 & 라즈베리 파이 OS 설치하기"/>
+	<meta property="og:url" content="https://yellowgreen.ddns.net/blog/raspberrypi/os/"/>
+	<meta property="og:image" content="https://yellowgreen.ddns.net/media/opengraph.png"/>
+	<meta property="og:type" content="blog"/>
+	<link rel="canonical" href="https://yellowgreen.ddns.net/blog/raspberrypi/os/">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+	</style>
+	<script type="text/javascript" src="/data/jquery.js"></script>
+	<script type="text/javascript" src="/js/index.js"></script>
+	<script type="text/javascript" src="/js/writing.js"></script>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+
+
+
+
+
+<h1>[라즈베리 파이] OS 설치 및 설정</h1>
+<div id="writingday">2021.06.09</div>
+<div id="notice">
+	<p><b>Raspberry Pi 4B</b>, <b>Raspberry Pi OS</b> 기준으로 작성했습니다.</p>
+	<p><b style="color: red">포맷</b>으로 인해 파일이 날아갈 경우 책임지지 않습니다.</p>
+</div>
+
+<div>라즈베리 파이에 설치할 수 있는 OS가 꽤 많다. 뭐 ARM 기반으로 만들어진 OS라면 다 되겠지만,,<br/>
+<br/>
+현재 나는 CentOS를 사용하고 있고, CentOS에서 공식적으로 ARM 기반 CentOS을 지원한다는 글을 보고 설치하려고 했다.<br/>
+하지만 이미 오래전 지원을 중단했고, 사용하려면 다른 사람이 만들어놓은 이미지를 써야 한다.<br/>
+그래서 ARM 이미지를 찾아서 설치해 봤는데, 속도가 느리거나, 일부 설정 창이 안 들어가지는 등의 잡다한 오류들이 꽤 많이 생겨서 그냥 지우고 라즈베리 파이 OS(구 라즈비안)를 사용하기로 했다.<br/>
+이렇게 데비안 계열도 사용해 보는 거지 뭐,,~</div>
+
+<h2>라즈베리 파이 OS 설치 전 준비</h2>
+<div>- 라즈베리 파이 외 다른 PC<br/>
+- 라즈베리 파이 4B<br/>
+- <a href="https://www.raspberrypi.org/software/">라즈베리 파이 공식 Imager</a><br/>
+- <a href="https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit">라즈베리 파이 OS 이미지</a> 또는 사용할 리눅스 OS 이미지 (선택사항)<br/>
+- SD카드 및 리더기<br/>
+- USB 또는 SSD/HDD (선택사항)<br/>
+OS를 설치할 때 <b style="color: red">포맷</b>하기 때문에 SD카드, USB, SSD/HDD 등 내부에 중요한 파일은 다른 곳으로 옮기자.<br/>
+<br/>
+OS 이미지가 선택사항인 이유는 공식 Imager 프로그램에서 일부 OS<span class="fn">라즈베리 파이 OS, Ubuntu, Kodi OS, game OS. 말고도 더 있다.</span>를 다운로드하지 않고 바로 설치할 수 있기 때문에 굳이 설치할 필요가 없다.<br/>
+하지만 용량도 별로 크지도 않고, 혹시 재설치할 일이 생기면 미리 다운로드한 파일로 설치하는 게 속도가 빠르기 때문에 미리 설치해 놓는 걸 권장한다.<br/>
+특히 USB, SSD/HDD에 설치할 때 속도 차이가 엄청나다.<br/>
+<br/>
+라즈베리 파이는 기본적으로 SD카드로 부팅해야 하지만, 별도의 설정을 통해 USB 포트로 부팅할 수도 있다.<br/>
+많은 작업을 할 거라면 SD카드보다 수명도 길고 속도도 빠른 USB나 SSD/HDD로 부팅해서 쓰는 게 좋다.</div>
+
+<h2>Imager 프로그램으로 OS 설치</h2>
+<div>다른 OS를 설치할 때도 이 방법을 사용할 수 있다.<br/>
+<br/>
+<a href="https://www.raspberrypi.org/software/">여기</a>서 공식 Imager 프로그램을 다운로드 후 실행.<br/>
+<img src="rpi-imager-choose_os.jpg"/>
+클릭.<br/>
+<br/>
+<img src="rpi-imager-os_list.jpg"/>
+Imager 프로그램에는 세 개의 라즈베리 파이 OS가 있다.<br/>
+- OS Lite : 최소한의 패키지만 설치되어 있으며, <b>CLI 버전</b><span class="fn">그래픽이 없다.</span>이다.<br/>
+- OS : 필수 패키지만 설치되어 있는 버전. 데스크톱 환경(그래픽 버전)이다. 위 사진에서 제일 위에 있는 저 OS.<br/>
+- OS Full : 당연히 데스크톱 환경이며, 많은 패키지가 설치되어 있다<span class="fn"><a href="/blog/raspberrypi/minecraft/">라즈베리 파이용 마인크래프트</a>도 설치되어 있다.</span>.<br/>
+<br/>
+그리고 <a href="https://www.raspberrypi.org/software/operating-systems/">공식 사이트</a>에는 네 개의 라즈베리 파이 OS가 있다.<br/>
+- OS Lite : Imager 프로그램의 Lite 버전.<br/>
+- OS with Desktop : Imager 프로그램의 OS 버전.<br/>
+- OS with Desktop and Recommended software : Imager 프로그램의 OS Full 버전.<br/>
+- OS Pi Desktop : ARM 기반이 아닌 일반 데스크톱 CPU에서 사용할 수 있도록 만들어진 라즈베리 파이 OS.<br/>
+<br/>
+그리고 위 라즈베리 파이 OS들은 모두 32비트 버전이다.<br/>
+64비트를 사용하고 싶다면 <a href="https://downloads.raspberrypi.org/raspios_arm64/images/">여기</a>서 제일 아래(최신 버전)로 들어가서 .zip 파일을 다운로드하면 된다. (베타버전이라 불안정하다.)<br/>
+<br/>
+이제 위 목록 중 설치하고 싶은 OS를 선택한다.<br/>
+GUI가 없는 Lite를 사용하려면 적어도 간단한 명령어와 nano 또는 vi 편집기 사용법은 알아야 한다.<br/>
+<br/>
+미리 다운로드한 이미지를 사용한다면 목록 중 제일 아래 Custom을 선택 후 해당 이미지를 찾아서 선택한다.<br/>
+<br/>
+<img src="rpi-imager-choose_storage.jpg"/>
+중간 버튼을 눌러서 OS를 설치할 설치할 장치를 선택한다.<br/>
+USB로 부팅하려면 별도의 설정이 필요하기 때문에 설정하지 않았다면 일단 SD카드에 설치해야 한다.<br/>
+<br/>
+다시 말하지만 디스크를 <b style="color: red">포맷</b>하기 때문에 제대로 선택했는지, 중요한 파일은 없는지 제대로 확인 후 설치하자.<br/>
+<br/>
+여기까지 했다면 제일 오른쪽 버튼을 누를 수 있게 되어있을 거다.<br/>
+<img src="rpi-imager-write.jpg"/>
+이 버튼을 누르는 순간 <b style="color: red">포맷</b>이 되며 OS를 설치한다. 해당 디스크에 파일이 있다면 싹 다 날아가 버린다.<br/>
+마지막 경고다.<br/>
+<br/>
+처음 진행 바가 움직이기 시작하는 데까지 걸리는 시간은 바로 움직일 수도 있고 오래 걸릴 수도 있다.<br/>
+나는 움직이기 시작하고 나서부터 3~5분 정도 걸렸다.<br/>
+SSD에 미리 다운로드한 이미지 파일로 설치하면 1분도 안 걸린다.<br/>
+<img src="rpi-imager-continue.jpg"/>
+설치가 끝났다.<br/>
+포맷으로 인한 날아간 파일들을 복구하려면 직접 포렌식 하던지 전문가에게 맡기던지.</div>
+
+<h2>부팅 전 원격 접속 및 인터넷 사용을 위한 설정하기 (선택사항)</h2>
+<div>이 과정은 라즈베리 파이 OS를 부팅한 후 설정할 수도 있으므로 넘어가도 된다.<br/>
+단, 모니터 없이 처음부터 원격 접속으로 사용할 거라면 무조건 필수다.<br/>
+<br/>
+먼저 OS 설치가 완료된 디스크는 자동으로 마운트가 해제되니 분리 후 다시 연결.<br/>
+<img src="windows-boot_drive.jpg"/>
+Windows 기준 '내 PC'에 들어가면 이렇게 두 개가 생기는데, boot에 들어가서<br/>
+<br/>
+<img src="windows-extension.jpg"/>
+상단 탭 '보기' --> '파일 확장명' 체크해 준다.<br/>
+<br/>
+<h3>원격 접속 설정</h3>
+<img src="windows-ssh.jpg"/>
+빈 곳에 마우스 우 클릭 --> 새로 만들기 --> 텍스트 문서를 누른 후 'ssh' 라는 이름으로 저장한다.<br/>
+'ssh.txt'가 아니다. 아무런 확장자가 없어야 한다.<br/>
+<br/>
+...끝<br/>
+<br/>
+<h3>와이파이 접속 설정</h3>
+접속할 와이파이에 관한 정보를 넣어주기 위해 위와 마찬가지로 파일을 생성한 후 'wpa_supplicant.txt'로 저장한다.<br/>
+이름은 어차피 바꿀 거니까 아무거나 적어도 상관없다.<br/>
+	<div class="codebox">
+		<div class="PSK">
+			<p>ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</p>
+			<p>update_config=1</p>
+			<p>conutry=KR</p>
+			<br/>
+			<p>network={</p>
+			<p>	ssid="Wi-Fi Name"</p>
+			<p>	psk="Wi-Fi Password"</p>
+			<p>}</p>
+		</div>
+		<div class="EAP">
+			<p>ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</p>
+			<p>update_config=1</p>
+			<p>conutry=KR</p>
+			<br/>
+			<p>network={</p>
+			<p>	ssid="Wi-Fi Name"</p>
+			<p>	key_mgmt=WPA-EAP</p>
+			<p>	eap=PEAP</p>
+			<p>	identity="ID"</p>
+			<p>	password="Password"</p>
+			<p>}</p>
+		</div>
+	</div>
+PSK : 개인 와이파이. 흔히 사용하는 가정용 와이파이.<br/>
+- 숨겨진 와이파이에 접속하려면 <span class="command">scan_ssid=1</span>을 추가로 입력하면 된다.<br/>
+- 암호가 걸려있지 않은 와이파이라면 <span class="command">key_mgmt=NONE</span>을 추가하고 <span class="command">psk="Wi-Fi Password"</span>를 지운다.<br/>
+<br/>
+EAP : 공용 와이파이. 인터넷을 이용하려면 개인 아이디와 비밀번호를 입력해야 하는 와이파이.<br/>
+<br/>
+위 내용을 사용할 와이파이에 맞게 수정한 후 해당 파일의 이름을 'wpa_supplicant.conf' 라는 이름으로 바꾼다.<br/>
+<img src="windows-wpa_supplicant.jpg"/>
+<br/>
+안전하게 제거하기 위해 '꺼내기'를 누른 후 분리한다.<br/>
+<img src="windows-umount.jpg"/></div>
+
+<h2>부팅하기</h2>
+<div>SD카드, 키보드, 마우스, 모니터 등 연결할 건 모두 연결한 후 라즈베리 파이에 전원을 넣어준다.<br/>
+OS 설치 후 처음 부팅할 때는 시간이 약간 더 오래 걸린다.<br/>
+<br/>
+<h3>OS Lite (CLI)</h3>
+Lite 버전을 설치했다면 <span class="command">raspberry login:</span>이 뜰 것이다. <span class="command">pi</span> 입력 후 엔터.<br/>
+패스워드에 <span class="command">raspberry</span> 입력 후 엔터를 누르면 된다. 입력해도 아무것도 적히지 않는 게 정상이다.<br/>
+<br/>
+<h3>그 외 (GUI)</h3>
+CLI 버전과 달리 자동으로 로그인된다.<br/>
+<img src="rpi-start-1.png"/>
+SSH 접속이 허용되어 있으니 조심하라는 경고문이다.<br/>
+위 설정에서 boot 파티션에 'ssh' 파일을 만들었다면 이 경고문이 뜨는 게 정상이다.<br/>
+OK<br/>
+<br/>
+<img src="rpi-start-2.png"/>
+"환영한다. 시작하기 전 몇 가지 설정을 하겠다."<br/>
+Next<br/>
+<br/>
+<img src="rpi-start-3.png"/>
+South Korea를 찾는다.<br/>
+'Use English language' 체크를 하지 않으면 설정한 언어에 따라 시스템 언어가 바뀌는 것 같다. 해보지는 않았다.<br/>
+여러모로 체크해서 영어로 사용하는 게 편하다.<br/>
+Next<br/>
+<br/>
+<img src="rpi-start-4.png"/>
+pi 계정의 암호를 바꾸는 설정이다.<br/>
+아무것도 입력하지 않으면 기본 패스워드인 'raspberry'로 진행되는 것 같다.<br/>
+Next<br/>
+<img src="rpi-start-5.png"/>
+모니터에 라즈베리 파이 화면으로 꽉 채워지지 않았다면 체크한다. 설정이 끝난 후 재부팅하면 꽉 채워진다.<br/>
+Next<br/>
+<br/>
+<img src="rpi-start-6.png"/>
+와이파이는 부팅 전에 설정했으면 당연히 Skip.<br/>
+아직 설정하지 않았어도 다음 글에서 따로 설정할 예정이다. Skip<br/>
+그냥 Skip.<br/>
+<br/>
+<img src="rpi-start-7.png"/>
+소프트웨어 업데이트 꽤 오래 걸린다.<br/>
+역시 다음 글에서 할 예정이다. Skip<br/>
+<br/>
+<img src="rpi-start-8.png"/>
+Restart<br/>
+<br/>
+끝.</div>
+
+<div id="linkto">
+	<a class="linkto" href="/blog/raspberrypi/" to="prev"></a>
+	<a class="linkto" href="/blog/raspberrypi/setting/" to="next"></a>
+</div>
+
+
+
+
+
+</body>
+</html>
