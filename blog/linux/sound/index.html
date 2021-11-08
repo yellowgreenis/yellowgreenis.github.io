@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>[Linux] 소리가 안 나거나 작을 때 해결 방법 | yellowgreen</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial=1, user-scalable=yes"/>
+	<meta name="author" content="yellowgreen"/>
+	<meta name="keyword" content="yellowgreen, 연두, blog, 블로그, Sound, 사운드, 소리, Error, 에러, 오류, alsa, alsamixer"/>
+	<meta name="description" content="[Linux] 소리가 안 나거나 작을 때 해결 방법"/>
+	<meta property="og:title" content="[Linux] 소리가 안 나거나 작을 때 해결 방법"/>
+	<meta property="og:description" content="[Linux] 소리가 안 나거나 작을 때 해결 방법"/>
+	<meta property="og:url" content="https://yellowgreen.ddns.net/blog/linux/sound/"/>
+	<meta property="og:image" content="https://yellowgreen.ddns.net/media/opengraph.png"/>
+	<meta property="og:type" content="blog"/>
+	<link rel="canonical" href="https://yellowgreen.ddns.net/blog/linux/sound/">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+	</style>
+	<script type="text/javascript" src="/data/jquery.js"></script>
+	<script type="text/javascript" src="/js/index.js"></script>
+	<script type="text/javascript" src="/js/writing.js"></script>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+
+
+
+
+
+<h1>[Linux] 소리가 안 나거나 작을 때 해결 방법</h1>
+<div id="writingday">2021.05.26</div>
+<div id="notice">
+	<p><b>CentOS 7</b> 기준으로 작성했습니다.</p>
+</div>
+
+<h2>스피커가 헤드폰으로 인식되는 문제?</h2>
+<div><h3>문제</h3>
+이때까지 노트북에 이어폰을 연결해서 쓰고 있어서 몰랐는데, 최근에 이어폰을 제거하고 유튜브를 재생하니 소리가 나지 않는다.<br/>
+유튜브 외 다른 mp4, mp3 등 모든 비디오 및 오디오 파일들이 소리가 나지 않는다.<br/>
+이어폰으로는 소리가 잘 들리니 고장 난 건 아니고.. 소리를 최대로 키웠더니 아주 작게 소리가 들리거나 들리지 않는다.<br/>
+설정이 뭐가 잘못됐구나,,<br/>
+<br/>
+<h3>방법 1</h3>
+<span class="command">alsamixer</span> -> F6 -> 사운드 카드 선택<br/>
+<img src="alsamixer.jpg"></img>
+이 창을 열어놓고 이어폰을 연결, 해제해봤다.<br/>
+<br/>
+이어폰 연결 시 Headphone이 100, Speaker가 0으로, 이어폰 분리 시 Headphone이 0, Speaker가 100으로 자동 조절된다,<br/>
+이름만 봐도 알 수 있듯 이어폰이 분리되었고 스피커로 소리를 출력해야 하니 Speaker가 100으로 올라가는 건 정상적인 상황이라고 생각된다.<br/>
+하지만 위 창에서 직접 값을 조절해 보면, 스피커로 소리가 출력되는 상황임에도 Headphone 값이 올라가야 소리가 출력되며, Speaker 값의 영향을 받지 않는다.<br/>
+그러니까 이어폰이 분리되어서 Headphone이 0으로 떨어지긴 했지만, 노트북에 내장된 스피커 자체도 Headphone으로 인식되는 게 아닌가 싶다.<br/>
+하지만 그렇다기엔 이상한 점이 있는데, Headphone 값을 따라가는 소리와 달리 뮤트는 Speaker를 따른다.<br/>
+<br/>
+일단 소리를 출력하기 위해 Headphon을 100<span class="fn">일반적인 방법으로 소리를 키우면 Headphone(또는 Speaker) 값을 먼저 100으로 올린 후 Master 값이 올라간다.</span>으로 올린 후 ESC를 누르고 빠져나오면 된다.<br/>
+하지만 이어폰을 분리할 때마다 이런 설정을 할 수는 없으니 다른 방법이 필요하다.<br/>
+<br/>
+<h3>방법 2</h3>
+현재 <span class="command">alsamixer</span>의 설정값을 저장해 주는 <span class="command">alsactl store</span>, 저장한 값을 불러오는 <span class="command">alsactl restore</span>를 이용한 방법이 있긴 한데 불편하다.<br/>
+첫 번째 방법으로 값을 설정하고, <span class="command">alsactl store</span>를 입력해 설정된 값을 저장한다. 그리고 <span class="command"><a href="/blog/linux/autorun/">.bashrc</a></span> 파일에다가<span class="fn"><a href="/blog/linux/autorun/">.bash_profile</a> 등 다른 파일에다가 넣어놓으면 적용이 되지 않는다.</span> <span class="command">alsactl restore</span> 명령어를 넣어둔다.<br/>
+이렇게 설정하면 소리가 나오다가도 터미널을 열기만 하면 저장한 값으로 되돌아가버리는 불편함이 있다.<br/>
+<br/>
+<h3>방법 3</h3>
+이어폰을 분리해도 Headphone의 값이 자동으로 조절되지 않게 하는 방법이 필요하다.<br/>
+<span class="command">analog-output-*.conf</span> 파일들을 건드리면 될 것 같긴 하다.<br/>
+해당 파일들은 아래 경로에 있다.<br/>
+<div class="command">/usr/share/pulseaudio/alsa-mixer/paths/</div></div>
+
+
+
+
+
+</body>
+</html>
