@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>letsencrypt로 만든 SSL 인증서 적용하기 | yellowgreen</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial=1, user-scalable=yes"/>
+	<meta name="author" content="yellowgreen"/>
+	<meta name="keyword" content="yellowgreen, 연두, blog, 블로그, apache, 아파치, letsencrypt, http, https, redirect, rewrite"/>
+	<meta name="description" content="letsencrypt로 만든 SSL 인증서 적용 및  HTTPS로 리다이렉트 하기"/>
+	<meta property="og:title" content="letsencrypt로 만든 SSL 인증서 적용하기"/>
+	<meta property="og:description" content="letsencrypt로 만든 SSL 인증서 적용 및  HTTP --> HTTPS 리다이렉트 하기"/>
+	<meta property="og:url" content="https://yellowgreen.ddns.net/blog/disable/letsencrypt/"/>
+	<meta property="og:image" content="https://yellowgreen.ddns.net/media/opengraph.png"/>
+	<meta property="og:type" content="blog"/>
+	<link rel="canonical" href="https://yellowgreen.ddns.net/blog/disable/letsencrypt/">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+	</style>
+	<script type="text/javascript" src="/data/jquery.js"></script>
+	<script type="text/javascript" src="/js/index.js"></script>
+	<script type="text/javascript" src="/js/writing.js"></script>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+
+
+
+
+
+<h1>letsencrypt로 만든 SSL 인증서 적용하기</h1>
+<div id="writingday">2021.07.06</div>
+<div id='notice'>
+	<p><b>Raspberry Pi OS</b> 기준으로 작성했습니다.</p>
+</div>
+
+<h2>Let's Encrypt</h2>
+<div>1. <span class="command">sudo apt-get install -y letsencrypt</span><br/>
+2. <span class="command">sudo systemctl stop apache2</span><br/>
+3. <span class="command">sudo letsencrypt certonly --standalone -d "Domain"</span><br/>
+4. <span class="command">sudo chmod +5 /etc/letsenccrypt/live</span><br/>
+5. <span class="command">sudo ln -s ../site-available/default-ssl.conf /etc/apache2/site-enabled/</span><br/>
+6. <span class="command">sudo vi /etc/apache2/site-enabled/default-ssl.conf</span><br/>
+6-1. <span class="command">SSLCertificateFile /etc/letsencrypt/live/"Domain"/cert.pem # 수정</span><br/>
+6-2. <span class="command">SSLCertificateKeyFile /etc/letsencrypt/live/"Domain"/privkey.pem # 수정</span><br/>
+6-3. <span class="command">SSLCertificateChainFile /etc/letsencrypt/live/"Domain"/Chain.pem # 수정</span><br/>
+6-4. <span class="command">SSLOptions +FakeBasicAuth +ExportCertData +StrictRequire # 주석 해제</span><br/>
+7. <span class="command">sudo a2enmod ssl</span><br/>
+8. <span class="command">sudo ufw allow in "WWW Full"</span><br/>
+9. <span class="command">sudo systemctl start apache2</span><br/>
+<br/>
++. <span class="command">sudo letsencrypt renew</span></div>
+
+<h2>HTTPS Redirect</h2>
+<div>1. <span class="command">sudo vi /etc/apache2/site-enabled/000-default.conf</span><br/>
+1-1. <span class="command">RewriteEngine on</span><br/>
+1-2. <span class="command">RewriteCond %{HRRPS} off</span><br/>
+1-3. <span class="command">RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R,L]</span><br/>
+2. <span class="command">sudo a2enmod rewrite</span><br/>
+3. <span class="command">sudo systemctl restart apache2</span></div>
+
+
+
+
+
+</body>
+</html>
