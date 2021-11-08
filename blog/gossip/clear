@@ -1,0 +1,7 @@
+<script type="text/javascript" src="/data/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("body").load("index.php h1, h1 ~", function() {
+	});
+});
+</script>
