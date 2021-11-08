@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>[Linux] JAVA 버전별 설치 및 적용 방법 | yellowgreen</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial=1, user-scalable=yes"/>
+	<meta name="author" content="yellowgreen"/>
+	<meta name="keyword" content="yellowgreen, 연두, blog, 블로그, Java, 자바, alternatives, update-alternatives, Minecraft, 마인크래프트"/>
+	<meta name="description" content="여러 버전의 자바를 설치한 후 상황에 맞게 버전 바꾸기"/>
+	<meta property="og:title" content="[Linux] JAVA 버전별 설치 및 적용 방법"/>
+	<meta property="og:description" content="여러 버전의 자바를 설치한 후 상황에 맞게 버전 바꾸기"/>
+	<meta property="og:url" content="https://yellowgreen.ddns.net/blog/linux/java/"/>
+	<meta property="og:image" content="https://yellowgreen.ddns.net/media/opengraph.png"/>
+	<meta property="og:type" content="blog"/>
+	<link rel="canonical" href="https://yellowgreen.ddns.net/blog/linux/java/">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+	</style>
+	<script type="text/javascript" src="/data/jquery.js"></script>
+	<script type="text/javascript" src="/js/index.js"></script>
+	<script type="text/javascript" src="/js/writing.js"></script>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+
+
+
+
+
+<h1>[Linux] JAVA 버전별 설치 및 적용 방법</h1>
+<div id="writingday">2021.07.16</div>
+<div id='notice'>
+	<p><b>Raspberry Pi OS</b>, <b>CentOS 7</b>를 기준으로 작성했습니다.</p>
+</div>
+
+<h2>JAVA 8</h2>
+<div><h3>Ubuntu/Debian</h3>
+<span class="command">sudo apt-get install -y openjdk-8-jdk openjdk-8-jre</span><br/>
+<br/>
+<h3>RHEL/Fedora</h3>
+RHEL/Fedora 7 이하 : <span class="command">sudo yum install -y java-1.8.0-openjdk</span><br/>
+RHEL/Fedora 8 이상 : <span class="command">sudo dnf install -y java-1.8.0-openjdk</span></div>
+
+<h2>JAVA 9</h2>
+<div><h3>Ubuntu/Debian</h3>
+<span class="command">sudo apt-get install -y openjdk-9-jdk openjdk-9-jre</span></div>
+
+<h2>JAVA 10</h2>
+<div><h3>Ubuntu/Debian</h3>
+<span class="command">sudo apt-get install -y openjdk-10-jdk openjdk-10-jre</span></div>
+
+<h2>JAVA 11</h2>
+<div><h3>Ubuntu/Debian</h3>
+<span class="command">sudo apt-get install -y openjdk-11-jdk openjdk-11-jre</span></div>
+
+<h2>JAVA 16</h2>
+<div>아마 어느 리눅스에도 JAVA 16은 없을 거다.<br/>
+그래서 Repository를 직접 추가하거나 파일을 구해서 설치해야 한다. <del>Repo가 있긴 한가?</del><br/>
+<br/>
+<h3>ARM 32Bit</h3>
+라즈베리 파이 OS 32비트 버전도 여기에 포함된다.<br/>
+1. <span class="command">wget https://github.com/AdoptOpenJDK/openjdk16-binaries/releases/download/jdk16u-2021-05-08-12-45/OpenJDK16U-jdk_arm_linux_hotspot_2021-05-08-12-45.tar.gz</span><br/>
+2. <span class="command">sudo tar zxvf jdk-16.tar.gz</span> : 압축을 풀고.<br/>
+3. <span class="command">sudo mv jdk-16 /usr/lib/jvm/</span> : 압축을 풀어서 나온 디렉토리의 위치를 옮긴 후.<br/>
+4. <span class="command">sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-16/bin/java 1</span>을 입력한다.<br/>
+- 3번에서 경로를 수정해도 상관은 없으나, 수정할 경우 4번에도 같이 수정해야 한다.<br/>
+- java 외 javac, javadoc, javap 등 필요한 건 4번 명령어를 이용해서 등록하면 된다.<br/>
+<h3>ARM 64Bit</h3>
+64비트는 사용하지 않아서 모르겠다. <a href="https://www.oracle.com/java/technologies/javase-jdk16-downloads.html">오라클</a>에 arm 버전이 있긴 한데, 되는지 모르겠다.<br/>
+<h3>RHEL/Fedora</h3>
+CentOS를 32비트로 사용하는 사람은 없겠지?<br/>
+그럼 <a href="https://www.oracle.com/java/technologies/javase-jdk16-downloads.html">오라클</a>에서 'Linux x64 RPM Package'파일을 받으면 된다. 확장자는 .rpm<br/>
+그리고 <span class="command">sudo rpm -ivh jdk-16.rpm</span><br/>
+끝.</div>
+
+<h2>버전 변경하기</h2>
+<div>아래 명령어를 입력하면 자바가 설치된 경로와 그 왼쪽에 번호가 뜨는데, 사용하고 싶은 자바의 번호를 입력 후 엔터를 누르면 된다.<br/>
+java 외 javac, javadoc, javap 등의 버전도 변경할 수 있다.<br/>
+<h3>Ubuntu/Debian</h3>
+<span class="command">sudo update-alternatices --config java</span><br/>
+<br/>
+<h3>RHEL/Fedora</h3>
+<span class="command">sudo alternatices --config java</span></div>
+
+
+
+
+
+</body>
+</html>
