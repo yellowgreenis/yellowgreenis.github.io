@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>[Linux] 시스템 부팅 시 명령어 자동 실행 | yellowgreen</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial=1, user-scalable=yes"/>
+	<meta name="author" content="yellowgreen"/>
+	<meta name="keyword" content="yellowgreen, 연두, blog, 블로그, Autorun, 자동 실행, rc.d, profile, bash_profile, bashrc, RunLevel, 런레벨"/>
+	<meta name="description" content="시스템 부팅 시 자동으로 실행할 수 있는 방법들 (rc.d, profile, bash_profile, bashrc)"/>
+	<meta property="og:title" content="[Linux] 시스템 부팅 시 명령어 자동 실행"/>
+	<meta property="og:description" content="시스템 부팅 시 자동으로 실행할 수 있는 방법들 (rc.d, profile, bash_profile, bashrc)"/>
+	<meta property="og:url" content="https://yellowgreen.ddns.net/blog/linux/autorun/"/>
+	<meta property="og:image" content="https://yellowgreen.ddns.net/media/opengraph.png"/>
+	<meta property="og:type" content="blog"/>
+	<link rel="canonical" href="https://yellowgreen.ddns.net/blog/linux/autorun/">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+	</style>
+	<script type="text/javascript" src="/data/jquery.js"></script>
+	<script type="text/javascript" src="/js/index.js"></script>
+	<script type="text/javascript" src="/js/writing.js"></script>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+
+
+
+
+
+<h1>[Linux] 시스템 부팅 시 명령어 자동 실행</h1>
+<div id="writingday">2021.05.27</div>
+<div id="notice">
+	<p><b>CentOS 7</b> 기준으로 작성했습니다.</p>
+</div>
+
+<div>리눅스를 사용하다 보면 시스템을 부팅할 때마다 특정 명령어 및 스크립트를 실행해 줘야 하는 경우가 생기는데, 한두 개 정도야 입력할 수는 있지만 그것도 귀찮을 때도 있고, 수 개, 수십 개까지 늘어난다면 몇 개는 까먹기도 할 거고, 메모해놓는다고 하더라도 그걸 다 입력하기는 너무 <b>귀.찮.다</b><br/>
+그럴 때 시스템을 부팅하면 자동으로 실행시켜주는 방법들이 있다.<br/>
+<br/>
+아래 순서는 시스템 부팅 시 실행되는 순서대로 나타낸 것이다.</div>
+
+<h2>/etc/rc.d/*</h2>
+<div><span class="command">/etc/rc.d/</span>에는 아래와 같은 파일들이 있다.<br/>
+만약 <span class="command">rc.d</span> 디렉토리가 없다면 <span class="command">/etc/</span>에 있다.<br/>
+<br/>
+<span class="command">init.d/</span> : 서비스 등록하는 곳 ..이라는데 어떻게 사용하는지 모르겠다<br/>
+<span class="command">rc[0-6].d/</span> : 각 RunLevel(런레벨)<span class="fn">0 : 시스템 종료 / 1 : 시스템 복구 모드 (root의 싱글 유저 모드) / 2 : 멀티 유저 모드 (3에서 네트워크 불가능), CentOS 7부터 미사용 (호환성을 위해 3과 동일 취급 & 사용자 정의 가능) / 3 : 멀티 유저 모드 / 4 : 미사용 (2와 마찬가지로 3과 동일 취급 & 사용자 정의 가능) / 5 : 그래픽 모드 (3 + 그래픽) / 6 : 시스템 재부팅</span>에 따라 디렉토리 내부 파일들이 실행된다.<br/>
+<span class="command">rc.local</span> : <span class="command">rc[1-5].d</span>가 끝나면 실행된다.<br/>
+이 외 다른 파일들도 있는데 나는 이 파일들뿐이라 잘 모르겠다.<br/>
+<br/>
+<span class="command">rc[0-6].d/</span>의 사용방법은 아직 모르겠지만, 디렉토리 내부에 스크립트 파일을 넣어두면 런레벨에 따라 디렉토리 내부 파일도 실행되는 것 같다.<br/>
+그리고 런레벨과 상관없이 무조건 실행하게 하고 싶은 경우, <span class="command">rc.local</span> 파일 내용에 스크립트 절대 경로를 넣어두거나 실행하고 싶은 명령어를 입력하면 된다.<br/>
+<span class="command">rc.local</span> 파일에 <b>실행 권한</b>이 없다면 실행되지 않는다. <span class="command">chmod +x /etc/rc.d/rc.local</span>로 실행 권한을 주면 된다.<br/>
+현재 나는 <span class="command">rc.local</span> 파일 마지막 줄에다가 <span class="command">samba</span>, <span class="command">mount</span>, <span class="command">rclone</span> 등의 명령어가 있는 스크립트 파일의 절대 경로를 입력해 두고 사용하고 있는데 매우 잘 된다.</div>
+
+<h2>/etc/profile & ~/.bash_profile</h2>
+<div><h3>/etc/profile</h3>
+모든 사용자를 대상으로 로그인 시 실행된다.<br/>
+<span class="command">/etc/profile</span> 파일은 스크립트 파일과 무관한 것들까지 넣어둘 수 있다.<br/>
+<h3>~/.bash_profile</h3>
+사용자의 홈 디렉토리에 있으며, 해당 사용자가 로그인 시 실행된다.<br/>
+
+<h2>/etc/bashrc & ~/.bashrc</h2>
+<div><h3>~/.bashrc</h3>
+사용자의 홈 디렉토리에 있으며, 해당 사용자가 터미널을 열 때 실행된다.<br/>
+<h3>/etc/bashrc</h3>
+모든 사용자의 <span class="command">~/.bashrc</span> 파일에서 호출된다.<br/>
+<br/>
+정확히는 <span class="command">bash</span>가 실행될 때 사용된다.<br/>
+<span class="command">mount</span> 같은 명령어를 이 파일들 안에 넣어둔다면, 터미널을 열 때마다 마운트를 하려고 시도할 것이니 이런 명령어들은 넣지 말자.</div>
+
+<h2>~/.bash_logout</h2>
+<div> : 해당 사용자가 로그아웃할 때 실행된다.<br/>
+모든 사용자를 대상으로 로그아웃할 때 실행되는 파일은 따로 존재하지 않는다. 대신 <span class="command">/etc/rc.d/rc0.d/</span>를 이용하면 된다.</div>
+
+
+
+
+
+</body>
+</html>
