@@ -1,0 +1,103 @@
+@import url("/css/variable.css");
+
+#comment {
+	border: 0;
+	margin: .5ex;
+	margin-top: 2em;
+	padding-top: 2em;
+} #comment hr {
+	margin-top: 5em;
+} #comment iframe {
+	display: none;
+	border: 0;
+	width: 100%;
+} #formbox {
+	margin: .5ex;
+} #comment [name="secret"] {
+	margin-bottom: 1ex;
+	cursor: pointer;
+} #comment input:not([name="secret"]) {
+	margin-bottom: 1ex;
+	padding: 1ex;
+	line-height: 1.5em;
+} #comment textarea {
+	padding: 1ex;
+	width: 100%;
+	height: 10em;
+	resize: none;
+} #comment label {
+	cursor: pointer;
+} #comment label[type="file"],
+#comment span.uploading {
+	border-bottom: 1px solid var(--bdcolor-sub);
+	padding: 1ex;
+	cursor: pointer;
+	float: left;
+} #formbox span[type="submit"] {
+	border-bottom: 1px solid var(--bdcolor-sub);
+	padding: 1ex;
+	cursor: pointer;
+	float: right;
+} @media screen and (min-width: 1341px) {
+	#comment input:not([type="checkbox"]) {
+		width: calc(100%/2 - 1ex/2);
+	} #comment input[name="name"] {
+		margin-right: 1ex;
+	}
+} @media screen and (max-width: 1340px) {
+	#comment input:not([type="checkbox"]) {
+		width: 100%;
+	}
+} #comment div.upload_list {
+	border: 1px solid var(--bdcolor-sub);
+	margin-top: 1ex;
+	padding: .5ex;
+	padding-top: 1ex;
+} #comment img.upload_list {
+	margin-left: 1ex;
+	cursor: pointer;
+} #comment .group_img> img {
+	cursor: pointer;
+	margin-top: .5%;
+	height: 15em;
+} #comment .group_img> img:not(:first-child) {
+	margin-left: 1%;
+}
+
+
+
+#comment .box {
+	position: relative;
+	margin-top: 2em;
+	padding: 1ex;
+} #comment .box[server] {
+	border-left: 1px solid var(--color-cursor);
+} #comment .box .name {
+	font-size: 1.25rem;
+} #comment .box> b {
+	display: inline-block;
+} #comment .box .date {
+	color: var(--color-sub);
+	text-align: right;
+} #comment .box .menu {
+	display: inline;
+	position: absolute;
+	right: 1ex;
+	top: .5ex;
+	color: var(--color-sub);
+} #comment .box .menu> span[class] {
+	cursor: pointer;
+} #updatebox {
+	padding-bottom: 2.5em;
+} #updatebox input:first-child {
+	margin-top: 1ex;
+} #updatebox [type="cancel"],
+#updatebox [type="submit"] {
+	border-bottom: 1px solid var(--bdcolor-sub);
+	margin-left: 1ex;
+	padding: 1ex;
+	cursor: pointer;
+	float: right;
+} #comment .comment {
+	margin-top: 1ex;
+}

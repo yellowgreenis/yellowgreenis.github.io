@@ -1,0 +1,167 @@
+@import url("/css/variable.css");
+
+@font-face {
+	font-family: 'BinggraeMelona';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BinggraeMelona.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+} @font-face {
+	font-family: 'BinggraeMelona-Bold';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BinggraeMelona-Bold.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}/* [type=a] * {
+	word-break: break-all;
+	word-wrap: break-word;
+} [type=b] * {
+	word-break: keep-all;
+	word-wrap: break-word;
+}*/
+
+* {
+	margin: 0;
+	padding: 0;
+
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+
+	word-break: break-all;
+	word-wrap: break-word;
+} html {
+	font-size: 16px;
+	background-color: var(--bgcolor);
+	color: var(--color);
+	overflow-x: hidden;
+
+	font-family: "BinggraeMelona";
+} a {
+	color: var(--color-cursor);
+	text-decoration: none;
+} a:hover {
+	color: var(--color-hover);
+} a:active {
+	color: var(--color-active);
+} a:not([href="/"]):hover img {
+	-webkit-filter: opacity(.5) drop-shadow(0 0 0 var(--color-hover));
+	filter: opacity(.5) drop-shadow(0 0 0 var(--color-hover));
+} a:not([href="/"]):active img {
+	-webkit-filter: opacity(.5) drop-shadow(0 0 0 var(--color-active));
+	filter: opacity(.5) drop-shadow(0 0 0 var(--color-active));
+} a[download]:before {
+	content: "";
+	background-image: url("/media/svg/Download-white.svg");
+	background-size: 1em 1em;
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	position: relative;
+	top: .1em;
+
+	-webkit-filter: opacity(.5) drop-shadow(0 0 0 var(--color-cursor));
+	filter: opacity(.5) drop-shadow(0 0 0 var(--color-cursor));
+} a[download]:hover {
+	-webkit-filter: opacity(.5) drop-shadow(0 0 0 var(--color-hover));
+	filter: opacity(.5) drop-shadow(0 0 0 var(--color-hover));
+} a[download]:active {
+	-webkit-filter: opacity(.5) drop-shadow(0 0 0 var(--color-active));
+	filter: opacity(.5) drop-shadow(0 0 0 var(--color-active));
+} li {
+	list-style: none;
+} del {
+	color: var(--color-sub);
+} del:hover {
+	text-decoration: none;
+} b {
+	text-decoration: underline;
+	font-family: "BinggraeMelona-Bold";
+} h1, h2, h3 {
+	font-family: "BinggraeMelona-Bold";
+} section img:not(.upload_list):not(.comment_img):not(.group_list) {
+	border: 1px solid var(--color-cursor);
+	display: block;
+	margin: 1ex auto;
+	max-width: 100%;
+	cursor: pointer;
+} hr {
+	margin: 3em;
+	border: none;
+	border-top: 1px dashed var(--color-sub);
+} details {
+	display: inline-block;
+	margin-top: 1em;
+	margin-bottom: 1em;
+} details[open] {
+	display: block;
+} details[open]> summary {
+	border: 1px solid var(--bdcolor);
+	border-bottom: 1px dashed var(--bdcolor);
+} details[open]> div {
+	border: 1px solid var(--bdcolor);
+	border-top: none;
+	padding-left: 1ex;
+	padding-right: 1ex;
+} .group_img {
+	border: 1px solid var(--bdcolor-sub);
+	display: block;
+	width: 100%;
+	height: auto;
+	white-space: nowrap;
+	border-collapse: collapse;
+	overflow-x: auto;
+	overflow-y: hidden;
+} .group_img .group_list {
+	max-width: 85%;
+	max-height: 100%;
+	cursor: pointer;
+}
+
+
+
+
+
+/* class */
+.ct1 {
+	display: table;
+
+} .ct2 {
+	display: table-cell;
+	vertical-align: middle;
+} .command {
+	background-color: black;
+	border: 1px solid var(--bdcolor-sub);
+	color: white;
+} div.command {
+	padding: .5ex 1ex;
+	margin: .5ex 0;
+} span.command {
+	display: inline;
+	padding-left: .5ex;
+	padding-right: .5ex;
+}
+
+
+
+
+
+/* id */
+
+#offset-x {
+	border-top: 1px solid red;
+	display: block;
+	position: fixed;
+	z-index: var(--z-index-offset);
+	width: 100vw;
+	height: 1px;
+	right: 0;
+	bottom: 0;
+} #offset-y {
+	border-left: 1px solid red;
+	display: block;
+	position: fixed;
+	z-index: var(--z-index-offset);
+	width: 1px;
+	height: 100vh;
+	right: 0;
+	bottom: 0;
+}

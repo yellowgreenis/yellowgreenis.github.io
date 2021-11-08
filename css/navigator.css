@@ -1,0 +1,136 @@
+@import url("/css/variable.css");
+
+/* resize */
+
+@media screen and (min-width: 1341px) {
+	body> header {
+		width: calc(var(--header-width) - var(--navigator-width));
+	} section {
+		margin-left: calc(var(--navigator-width) + ((100% - var(--navigator-width) - var(--section-width)) / 2));
+	} body> footer {
+		width: calc(var(--header-width) - var(--navigator-width));
+		margin-left: var(--navigator-width);
+		padding-left: calc((100% - var(--navigator-width) - var(--section-width)) / 2);
+		padding-right: calc((100% - var(--navigator-width) - var(--section-width)) / 2);
+	}
+}
+
+
+
+
+
+/* navigator */
+
+nav {
+	background-color: var(--bgcolor);
+	border-right: 1px solid var(--bdcolor);
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: var(--navigator-width);
+	top: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	z-index: var(--z-index-navigator);
+} @media screen and (min-width: 1341px) {
+	nav {
+		left: 0;
+		overflow-y: hidden;
+	} nav:hover {
+		overflow-y: auto;
+	} nav> a {
+		width: var(--navigator-width);
+	}
+} @media screen and (max-width: 1340px) {
+	nav {
+		left: -100%;
+		transition: left 500ms;
+	} nav.show {
+		left: 0;
+	} nav> a {
+		width: calc(100% - var(--header-height));
+		margin-left: var(--header-height);
+	}
+} nav> a {
+	border-bottom: 1px solid var(--bdcolor);
+	position: relative;
+	display: block;
+	height: var(--header-height);
+	overflow: hidden;
+} nav>a> img {
+	display: block;
+	height: calc(var(--header-height) / 11 * 6);
+	margin: auto;
+	margin-top: calc((var(--header-height) - var(--header-height)/11*6) /2 );
+} nav ul {
+	flex: 1;
+	margin-left: .5rem;
+	font-size: 1.3em;
+} nav li {
+	margin-top: 1.5rem;
+	margin-left: 1.5rem;
+} nav li:first-child {
+	margin-top: 2rem;
+} nav ul img {
+	margin-right: .5rem;
+}
+
+/* navigator footer */
+
+nav> div {
+	border-top: 1px solid var(--bdcolor);
+	height: var(--footer-height);
+	width: 100%;
+	margin-top: 1em;
+	padding: .5em;
+} nav>div img {
+	width: 30px;
+} nav>div> * {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+/* navigator botton */
+
+@media screen and (min-width: 1341px) {
+	#navbtn {
+		display: none;
+	}
+} @media screen and (max-width: 1340px) {
+	#navbtn {
+		border: 1px solid var(--bdcolor);
+		background-color: var(--bgcolor);
+		position: fixed;
+		height: var(--header-height);
+		width: var(--header-height);
+		top: 0;
+		left: 0;
+		cursor: pointer;
+		z-index: calc(var(--z-index-navigator) + 1);
+	}
+} #navbtn div {
+	border-bottom: 1px solid var(--color-cursor);
+	position: absolute;
+	width: 70%;
+	left: 15%;
+	transition: all 500ms;
+	transform-origin: left;
+} #navbtn div:first-child {
+	margin-top: 30%;
+} #navbtn div:nth-child(2) {
+	margin-top: 50%;
+} #navbtn div:last-child {
+	margin-top: 70%;
+} nav.show #navbtn div {
+	width: 100%;
+} nav.show #navbtn div:first-child {
+	margin-top: 15%;
+	transform: rotate(45deg);
+} nav.show #navbtn div:nth-child(2) {
+	width: 0;
+	left: 50%;
+} nav.show #navbtn div:last-child {
+	margin-top: 85%;
+	transform: rotate(-45deg);
+}

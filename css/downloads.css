@@ -1,0 +1,9 @@
+@import url("/css/variable.css");
+
+.mvtag {
+	display: inline-block;
+	color: var(--color-cursor);
+	cursor: pointer;
+} section> div:not(.table) {
+	margin-top: 1.5em;
+}

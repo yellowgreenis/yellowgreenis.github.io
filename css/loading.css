@@ -1,0 +1,15 @@
+#loading {
+	background-color: var(--bgcolor);
+	position: fixed;
+	display: table;
+	width: 100vw;
+	height: 100vh;
+	bottom: 0;
+	right: 0;
+	z-index: var(--z-index-loading);
+} #loading p {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 2em;
+}

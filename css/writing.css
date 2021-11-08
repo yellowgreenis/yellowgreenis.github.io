@@ -1,0 +1,73 @@
+@import url("/css/variable.css");
+
+h1 {
+	text-align: center;
+} h2 {
+	display: inline-block;
+	margin-top: 2em;
+	margin-bottom: .2em;
+/*	text-decoration: underline;*/
+	color: var(--color-cursor);
+} h2:hover {
+	color: var(--color-hover);
+} h2:active {
+	color: var(--color-active);
+} h3 {
+	margin-top: 1em;
+	margin-bottom: .1em;
+} h3:before {
+	content: "- ";
+} h3:after {
+	content: " -";
+} #writingday {
+	text-align: right;
+	margin-top: 2em;
+	margin-bottom: 2em;
+} #notice {
+	margin-bottom: 5em;
+	text-align: center;
+	font-size: 1.2em;
+} #hlist a {
+	display: block;
+	border: 1px solid var(--bdcolor);
+	width: 98%;
+	margin: auto;
+	padding: 1em;
+} #linkto {
+	margin-top: 3em;
+} a.linkto {
+	display: block;
+	border: 1px solid var(--bdcolor);
+	width: 98%;
+	margin: auto;
+	padding: 1em;
+	margin-top: .5em;
+	margin-bottom: .5em;
+} [mv] {
+	cursor: pointer;
+}
+
+
+
+/* comment */
+
+#comment {
+	border-top: 1px solid var(--bdcolor);
+	margin-top: 5em;
+} #comment .box {
+	border-left: 1px solid var(--bdcolor-sub);
+} #comment .reply {
+	border-left: 1px solid var(--bdcolor);
+	padding-left: 1em;
+}
+
+
+
+#comment .mention {
+	cursor: pointer;
+	color: var(--color-cursor);
+} #comment .mention:hover {
+	color: var(--color-hover);
+} #comment .mention:active {
+	color: var(--color-active);
+}

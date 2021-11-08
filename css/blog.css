@@ -1,0 +1,69 @@
+@import url("/css/variable.css");
+
+section ul {
+} section li {
+	border-bottom: 1px solid var(--bdcolor);
+	display: block;
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-bottom: .5ex;
+	margin-top: 1em;
+	margin-bottom: 1em;
+} section li> p,
+section li> div {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	cursor: pointer;
+} section li span {
+	color: var(--color-sub);
+}
+
+
+
+.selectbox {
+	margin-bottom: 3em;
+} .selectbox[disable] {
+	display: none;
+} select {
+	display: block;
+	margin: auto;
+	margin-top: .5em;
+} #reverse {
+	display: block;
+	text-align: right;
+} #reverse span {
+	cursor: pointer;
+	color: var(--color-sub);
+}
+
+
+.category, .hashtag {
+	display: inline-block;
+	margin-right: .5em;
+}
+
+
+
+section li> p {
+	font-family: "BinggraeMelona-Bold";
+	font-size: 1.5em;
+} section li b {
+	text-decoration: none;
+} @media screen and (min-width: 1341px) {
+	section li> p {
+		-webkit-line-clamp: 1;
+	} section li> div {
+		-webkit-line-clamp: 2;
+	} select {
+		width: 25%;
+	}
+} @media screen and (max-width: 1340px) {
+	section li> p {
+		-webkit-line-clamp: 1;
+	} section li> div {
+		-webkit-line-clamp: 3;
+	} select {
+		width: 60%;
+	}
+}

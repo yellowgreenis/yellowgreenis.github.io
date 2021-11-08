@@ -1,0 +1,61 @@
+/* @import url("/css/variable.css"); */
+
+:root {
+	--color: white;
+	--color-sub: #777;
+	--color-cursor: yellowgreen;
+	--color-hover: darkgreen;
+	--color-active: red;
+	--bgcolor: #333;
+	--bgcolor-sub: black;
+	--bdcolor: #444;
+	--bdcolor-sub: #777;
+
+	--z-index-loading: 99999;
+	--z-index-offset: 999999999;
+	--z-index-header: 300;
+	--z-index-navigator: 400;
+	--z-index-footnote: 600;
+}
+
+@media (prefers-color-scheme: light) {
+	/* Light Mode or Unknown */
+} @media (prefers-color-scheme: dark) {
+	/* Dark Mode */
+}
+
+
+
+@media screen and (min-width: 1341px) {
+	:root {
+		--section-width: 1100px;
+		--header-height: 55px;
+		--header-width: 100%;
+		--navigator-width: 240px;
+		--footer-height: 75px;
+		--footer-width: 100%;
+	}
+} @media screen and (max-width: 1340px) {
+	:root {
+		--section-width: 100%;
+		--header-height: 55px;
+		--header-width: 100%;
+		--navigator-width: 100%;
+		--footer-height: 75px;
+		--footer-width: 100%;
+	}
+}
+
+
+
+
+
+[name*=""] {
+	/* 해당 값을 포함 */
+} [name~=""] {
+	/* 해당 값을 포함 (띄어쓰기 기준) */
+} [name^=""] {
+	/* 해당 값으로 시작 */
+} [name$=""] {
+	/* 해당 값으로 끝 */
+}

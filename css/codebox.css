@@ -1,0 +1,102 @@
+@import url("/css/variable.css");
+
+.codebox {
+	margin-top: .5em;
+	margin-bottom: .5em;
+	width: 100%;
+	background-color: var(--bdcolor-sub);
+	position: relative;
+	border: 1px solid var(--bdcolor-sub);
+} .codebox> div {
+} .codebox> div:not(.Result) {
+	position: relative;
+	max-height: 50vh;
+	padding-top: .5em;
+	padding-bottom: .5em;
+	display: table;
+	background-color: var(--bgcolor-sub);
+	overflow: auto;
+	width: 100%;
+	white-space: nowrap;
+	border-collapse: collapse;
+} .codebox> input:not([name=copy]) {
+	background-color: #ccc;
+	border: 1px solid var(--bgcolor-sub);
+	min-width: 2.5em;
+	padding: .5em;
+	margin: .5em;
+} .codebox> input:not([name=copy]):hover {
+	background-color: #aaa;
+	cursor: pointer;
+} .codebox [name=copy] {
+	background-color: transparent;
+	border: 0;
+	color: var(--color);
+	width: 2.5em;
+	position: absolute;
+	right: 1em;
+	top: 1em;
+	cursor: pointer;
+} .codebox span.copy {
+	position: absolute;
+	background-color: var(--bgcolor);
+	bottom: 0;
+	display: table;
+	width: 100%;
+	height: calc(100% - 3.15em);
+} .codebox span.copy span {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.codebox span.line-number {
+	position: absolute;
+	background-color: var(--bgcolor-sub);
+	text-align: right;
+	padding-right: .5ex;
+	border-right: 1px solid var(--bdcolor-sub);
+} .codebox span.pover {
+	position: absolute;
+	right: 0;
+	border-bottom: 1px solid #171717;
+}
+
+.codebox p,
+.codebox p span {
+	word-break: break-all;
+} .codebox p {
+	position: relative;
+	z-index: 10;
+}
+
+
+
+/* color */
+.codebox [white] {
+	color: white;
+} .codebox [red] {
+	color: #ec5f66;
+} .codebox [pink] {
+	color: #ff00ff;
+} .codebox [brown] {
+	color: #a52a2a;
+} .codebox [note],
+.codebox [note] *:not(.line-number) {
+	color: #74705d;
+} .codebox [err] {
+	color: white;
+	background-color: #f92472;
+}
+
+
+
+/* Result */
+.codebox .Result {
+	padding: .5em;
+	background-color: var(--bgcolor-sub);
+	color: var(--color);
+} .codebox.html .Result {
+	background-color: white;
+	color: black;
+}

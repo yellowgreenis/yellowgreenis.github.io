@@ -1,0 +1,109 @@
+@import url("/css/variable.css");
+
+:root {
+	--fn-color: skyblue;
+	--fn-color: #68ff08;
+}
+
+
+
+.fn[fn]:before {
+	content: attr(fn);
+} .fn[wfn]:before {
+	content: attr(wfn);
+} .fn:before {
+	color: var(--fn-color);
+	cursor: pointer;
+} .fn {
+	position: relative;
+	bottom: .5em;
+	font-size: .85em;
+} #fn_list .fn_note:before {
+/*	content: " | ";*/
+} #fnbox> span:first-child {
+	display: block;
+	text-align: center;
+	border-bottom: 1px solid var(--bdcolor);
+	padding-bottom: .5ex;
+	margin-bottom: .5ex;
+}
+
+.fn:first-child {
+	margin: 2em;
+}
+
+#fn_list {
+	border-top: 1px solid var(--bdcolor);
+	margin-top: 3em;
+	padding: 1%;
+	font-size: 95%;
+} #fnbox> span:first-child,
+#fn_list>p> span[id$="_fn"],
+#fn_list>p>span[id$="_wfn"]> span {
+	color: var(--fn-color);
+	cursor: pointer;
+} #fn_list>p>span[id$="_wfn"]> span {
+	margin-left: .5ex;
+} /*#fnbox> span:not([class]):after,*/
+#fn_list>p> .fn_note:before {
+	content: " | ";
+} #fn_list a[img] {
+	cursor: pointer;
+}
+
+
+
+#fnbox {
+	display: block;
+	position: absolute;
+	background-color: var(--bgcolor);
+	border: 1px solid var(--fn-color);
+	padding: .5em;
+	padding-top: .3em;
+	padding-bottom: .3em;
+	z-index: var(--z-index-footnote);
+} @media screen and (min-width: 1341px) {
+	#fnbox {
+		max-width: calc(100vw / 2);
+		border-radius: .3em;
+	} #fnbox img {
+		max-width: calc(100vw / 2 - 1em);
+		max-height: calc(100vw / 2 - 1em);
+	}
+} @media screen and (max-width: 1340px) {
+	#fnbox {
+		max-width: 100%;
+		border-bottom: 0;
+		border-top-left-radius: .3em;
+		border-top-right-radius: .3em;
+		width: 100%;
+		top: 0;
+		left: 0;
+		text-align: center;
+	} #fnbox img {
+		max-width: calc(100% - 1em);
+		max-height: calc(100% - 1em);
+	}
+} #fnclose {
+	display: block;
+	position: absolute;
+	background-color: var(--bgcolor);
+	border: 1px solid var(--fn-color);
+	border-top: 1px solid var(--bdcolor);
+	width: 100%;
+	border-bottom-left-radius: .3em;
+	border-bottom-right-radius: .3em;
+	text-align: center;
+	color: var(--color-sub);
+	right: 0;
+	z-index: var(--z-index-footnote);
+	cursor: pointer;
+} #fnback {
+	display: block;
+	position: absolute;
+	background-color: rgba(0, 0, 0, .3);
+	width: 100vw;
+	height: 100vh;
+	right: 0;
+	z-index: calc(var(--z-index-footnote) - 1);
+}

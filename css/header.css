@@ -1,0 +1,28 @@
+@import url("/css/variable.css");
+
+/* resize */
+
+section {
+	padding-top: calc(var(--header-height) + 2em);
+}
+
+
+
+
+
+body> header {
+	background-color: var(--bgcolor);
+	border-bottom: 1px solid var(--bdcolor);
+	position: fixed;
+	display: table;
+	height: var(--header-height);
+	width: var(--header-width);
+	top: 0;
+	right: 0;
+	z-index: var(--z-index-header);
+} body> header a {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 1.5em;
+}

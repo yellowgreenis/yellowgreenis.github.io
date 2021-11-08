@@ -1,0 +1,11 @@
+section {
+	display: table;
+	height: 100vh;
+}
+.ct2 {
+	text-align: center;
+	font-size: 1.5em;
+} h1 {
+	font-size: 1.5rem;
+	display: inline-block;
+}

@@ -1,0 +1,19 @@
+@import url("/css/variable.css");
+
+
+
+/* import /css/comment.css */
+#comment .box {
+	border: 1px solid var(--bdcolor-sub);
+} #comment .box hr {
+	margin: 1ex;
+} #comment .box .reply> *:not(hr):not(br) {
+	margin: 1ex;
+}
+
+/*
+
+ #comment .box .reply> *:not(hr) {
+	margin: 1ex;
+}
+*/
