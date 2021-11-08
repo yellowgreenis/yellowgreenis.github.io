@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Home | yellowgreen</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+	<meta name="author" content="yellowgreen"/>
+	<meta name="keyword" content="yellowgreen, 연두"/>
+	<meta name="description" content="yellowgreen's Home"/>
+	<meta property="og:title" content="Home"/>
+	<meta property="og:description" content="yellowgreen's Home"/>
+	<meta property="og:url" content="https://yellowgreen.ddns.net/"/>
+	<meta property="og:image" content="https://yellowgreen.ddns.net/media/opengraph.png"/>
+	<meta property="og:type" content="website"/>
+	<link rel="canonical" href="https://yellowgreen.ddns.net/">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="/css/index.css"/>
+	<style>
+html, body {
+	width: 100%;
+	height: 100%;
+} a {
+	display: block;
+	font-size: 30px;
+	margin-top: .5em;
+	color: var(--color);
+} a> img {
+	margin-right: .5em;
+} a:hover> img {
+	-webkit-filter: opacity(.5) drop-shadow(0 0 0 var(--color-hover));
+	filter: opacity(.5) drop-shadow(0 0 0 var(--color-hover));
+} a:active> img {
+	-webkit-filter: opacity(.5) drop-shadow(0 0 0 var(--color-active));
+	filter: opacity(.5) drop-shadow(0 0 0 var(--color-active));
+} .navbox {
+	display: inline-block;
+}
+	</style>
+	<script type="text/javascript" src="/data/jquery.js"></script>
+	<script type="text/javascript" src="/js/loading.js"></script>
+	<script type="text/javascript">
+$(document).ready(function() {
+	var margin = $(document).innerWidth() - $(".navbox").outerWidth();
+	$(".navbox").css("margin-left", margin/2);
+});
+	</script>
+</head>
+<body class="ct1">
+	<div class="ct2">
+		<span class="navbox">
+			<a href="/blog/"><img src="/media/svg/Blog-white.svg" width="35px" height=""/>Blog</a>
+			<a href="https://open.kakao.com/me/yellowgreen"><img src="/media/svg/KakaoTalk-white.svg" width="35px" height=""/>KakaoTalk</a>
+			<a href="/downloads/"><img src="/media/svg/Download-white.svg" width="35px" height=""/>Downloads</a>
+			<a href="/guestbook/"><img src="/media/svg/Guestbook-white.svg" width="35px" height=""/>Guestbook</a>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function() {
+		loading_end();
+	});
+</script>
