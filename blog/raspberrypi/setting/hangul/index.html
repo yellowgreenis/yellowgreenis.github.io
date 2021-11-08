@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>[라즈베리 파이] 한글 깨짐 현상 및 한글 입력하기 | yellowgreen</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial=1, user-scalable=yes"/>
+	<meta name="author" content="yellowgreen"/>
+	<meta name="keyword" content="yellowgreen, 연두, blog, 블로그, Raspberry Pi 4B, 라즈베리 파이 4B, Korean, 한국어, Hangul, 한글"/>
+	<meta name="description" content="한글 폰트와 한글 입력기 설치 및 사용방법"/>
+	<meta property="og:title" content="[라즈베리 파이] 한글 깨짐 현상 및 한글 입력하기"/>
+	<meta property="og:description" content="한글 폰트와 한글 입력기 설치 및 사용방법"/>
+	<meta property="og:url" content="https://yellowgreen.ddns.net/blog/raspberrypi/setting/hangul/"/>
+	<meta property="og:image" content="https://yellowgreen.ddns.net/media/opengraph.png"/>
+	<meta property="og:type" content="blog"/>
+	<link rel="canonical" href="https://yellowgreen.ddns.net/blog/raspberrypi/setting/hangul/">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+	</style>
+	<script type="text/javascript" src="/data/jquery.js"></script>
+	<script type="text/javascript" src="/js/index.js"></script>
+	<script type="text/javascript" src="/js/writing.js"></script>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+
+
+
+
+
+<h1>[라즈베리 파이] 한글 깨짐 현상 및 한글 입력하기</h1>
+<div id="writingday">2021.06.11</div>
+<div id="notice">
+	<p><b>Raspberry Pi 4B</b>, <b>Raspberry Pi OS</b> 기준으로 작성했습니다.</p>
+</div>
+
+<h2>한글 깨짐 현상 해결</h2>
+<div>
+1. <span class="command">sudo apt-get install -y fonts-unfonts-core</span><br/>
+... 끝이다.<br/>
+<br/>
+바로 적용이 안 된다면? 당연히 재부팅.</div>
+
+<h2>한글 입력하기 (fcitx)</h2>
+<div>한글을 입력하기 위해서는 nabi, ibus, fcitx 등 여러 방법이 있는데, 다른 방법들 보다 fcitx가 제일 안정적인 것 같다.<br/>
+<br/>
+Lite 버전에서 한글 입력할 사람은 없겠지? 그럼 그래픽 버전으로 설명한다. <del>사실 방법을 모른다..</del><br/>
+<br/>
+1. <span class="command">sudo apt-get install -y fcitx fcitx-hangul</span><br/>
+2. <span class="command">sudo vi /etc/default/im-config</span><br/>
+3. <span class="command">IM_CONFIG_DEFAULT_MODE=</span> 값을 fcitx로 수정.<br/>
+4. <span class="command">im-config -n default</span><br/>
+5. <span class="command">sudo reboot</span><br/>
+6. <span class="command">fcitx-config-gtk3</span><br/>
+<img src="fcitx-conf.png"/>
+7. 왼쪽 아래 +버튼 클릭<br/>
+8. Only Show Current Language 체크 풀고 hangul 검색 후 선택 & OK.<br/>
+<img src="fcitx-add-hangul.png"/><br/>
++ 이제 컨트롤+스페이스바를 눌러서 언어를 변경할 수 있으며, 아래 창에서 단축키를 변경할 수도 있다.<br/><img src="fcitx-shortcut-key.png"/></div>
+
+<h2>sudo gedit에서 한글 입력이 안 되는 증상</h2>
+<div>이 있지만 해결 방법을 모르겠다.</div>
+
+<div id="linkto">
+	<a class="linkto" href="/blog/raspberrypi/setting/" to="prev"></a>
+</div>
+
+
+
+
+
+</body>
+</html>
