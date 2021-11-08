@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>[라즈베리 파이] 마인크래프트 자바 에디션 서버 구축하기 | yellowgreen</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial=1, user-scalable=yes"/>
+	<meta name="author" content="yellowgreen"/>
+	<meta name="keyword" content="yellowgreen, 연두, blog, 블로그, Raspberry Pi 4B, 라즈베리 파이 4B, Minecraft, 마인크래프트, Java edition, 자바에디션, Server, 서버, spigot, paper"/>
+	<meta name="description" content="마인크래프트 서버 종류 및 라즈베리 파이로 서버 여는 방법"/>
+	<meta property="og:title" content="[라즈베리 파이] 마인크래프트 자바 에디션 서버 구축하기"/>
+	<meta property="og:description" content="마인크래프트 서버 종류 및 라즈베리 파이로 서버 여는 방법"/>
+	<meta property="og:url" content="https://yellowgreen.ddns.net/blog/raspberrypi/minecraft/"/>
+	<meta property="og:image" content="https://yellowgreen.ddns.net/media/opengraph.png"/>
+	<meta property="og:type" content="blog"/>
+	<link rel="canonical" href="https://yellowgreen.ddns.net/blog/raspberrypi/minecraft/">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+	</style>
+	<script type="text/javascript" src="/data/jquery.js"></script>
+	<script type="text/javascript" src="/js/index.js"></script>
+	<script type="text/javascript" src="/js/writing.js"></script>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+
+
+
+
+
+<h1>[라즈베리 파이] 마인크래프트 자바 에디션 서버 구축하기</h1>
+<div id="writingday">2021.08.18</div>
+<div id='notice'>
+	<p><b>Raspberry Pi OS</b> 기준으로 작성했습니다.</p>
+	<p><b>CentOS 7</b> 추가</p>
+</div>
+
+<div>마인크래프트 게임은 자바 에디션을 시작으로 많은 에디션이 출시되었는데, 그중 라즈베리 파이 전용 에디션인 파이 에디션이 있다.<br/>
+<br/>
+라즈베리 파이 OS는 Full 버전인 OS with Desktop을 설치하면 라즈베리 파이 전용 마인크래프트인 파이 에디션이 기본적으로 설치되어 있다.<br/>
+그 외 라즈베리 파이의 다른 버전들은 <span class="command">sudo apt-get install -y minecraft-pi</span>으로 설치할 수 있다.<br/>
+하지만 파이 에디션은 0.1.1 버전이 마지막으로 개발이 중단돼서 크리에이티브 모드만 가능하며 맵이 작은 등 제한적인 기능이 많다.<br/>
+심지어 작업대 화로 등 몇몇 템들은 아무런 기능도 없는 블록 쪼가리에, 몬스터도 안 나온다.<br/>
+제일 큰 문제는 렉이 많고 자주 끊긴다고 한다.<br/>
+<br/>
+뭐 그래서 파이 에디션을 할 생각은 접고, 라즈베리 파이로 마인크래프트 서버로 사용한다는 글이 많길래 도전해보기로 했다.<br/>
+그래서 오랜만에 Windows에 마인크래프트 자바 에디션을 설치했는데, 어떤 회사와는 다르게 <del>사랑합니다 Steinberg</del> 꾸준히 무료로 버전 업데이트를 해준다.<br/>
+덕분에 8년도 더 지난 지금도 최신 버전을 사용할 수 있다.. 휴<br/>
+옛날에 친구들이랑 할 때는 항상 컴퓨터를 켜놓을 수 있는 사람이 없으니 여러 서버를 돌아다니며 했기 때문에 불편해서 이런 24시간 서버를 갖고 싶었는데.. 이제야 그 소원을 이루는구나<br/>
+<br/>
+사실 라즈베리 파이, CentOS를 포함한 모든 리눅스가 자바를 설치하는 것 외 모든 과정이 똑같다.</div>
+
+<h2>후기부터</h2>
+<div>뭐 나도 서버를 돌려서 혼자 해보기만 했지 막 사람들 모아서 같이 플레이해보진 않아서 어느 정도 성능까지 되는지는 모르겠다.<br/>
+일단 서버 열고 혼자 들어가서 즐기기엔 아무런 문제도 없다는 것.<br/>
+대규모는 당연히 안 되겠지만 그래도 소수 인원으로 돌아가는 서버 정도는 문제없지 않을까 싶다.<br/>
+물론 4B가 아닌 하위 모델은 좀 버거울 수 있다.<br/>
+<br/>
+<del>혼자 할 거면 굳이 파이에서 돌릴 이유가?</del> 생겼다. JE에 <a href="https://ci.opencollab.dev//job/GeyserMC/job/Geyser/job/master/" target="_blank">Geyser 플러그인</a>을 넣으면 BE에서 접속할 수 있다.<br/>
+BE에서 접속할 때 JE에서 사용하는 계정으로 로그인을 하면<span class="fn">서버에 접속할 때 로그인 창이 뜨기 때문에 BE에서 따로 로그아웃을 하지 않아도 된다.</span> 같은 캐릭터로 계속 이어서 할 수 있다.<br/>
+PC든 모바일이든 하고싶을 때 SSH로 원격접속 후 서버를 열어서 게임을 하면 된다.<br/>
+로컬 서버인데도 약간 느리다거나 스킨이 깨져서 보이는 등의 문제점도 있지만, 기본 기능을 사용하는데 문제가 될만한 건 겪어보진 못했다.<br/>
+<br/>
+라즈베리 파이 OS와 노트북의 CentOS 7 둘 다 최소, 최대 메모리를 같은 2GB로 줬는데도 노트북이 더 빠르다.<br/>
+파이가 느려서 그런 건지 노트북이 빨라서 그런 건지, 서버를 열 때랑 닫을 때 걸리는 시간 차이가 꽤 난다. 특히 서버를 처음 구동하면서 맵을 만들 때.<br/>
+...이유는 모르겠지만 <span class="command">nohub</span>을 사용하니 닫길 때의 시간이 매우 단축됐다.<br/>
+<span class="command">ps -ef</span>로 확인한 결과 <span class="command">nohub</span>으로 실행한 명령어의 TIME이 1초에 3초씩 올라가거나 하는 등 지멋대로 막 올라간다. 이 현상과 관련이 있을 수도 있다.</div>
+
+<h2>오류 (CentOS)</h2>
+<div><h3>서버 관리 GUI</h3>
+<img src="server-gui.png"/>
+이게 라즈베리 파이 OS의 그래픽 버전에서도 나타나는 문제인지는 모르겠지만, CentOS 7에서 서버 구동 시 위 사진의 GUI가 뜨는데 열리자마자 멈춰버린다.<br/>
+그래서 서버를 닫아도 GUI가 닫기지 않으니 명령어가 끝나지 않는다. <span class="command">kill -9 [PID]</span>로 죽여야 한다.<br/>
+로그에 서버가 정상적으로 닫겼다고 뜬 후에 kill을 먹이면 문제없이 게임이 저장되어 있다.<br/>
+아예 서버를 열 때 해당 그래픽이 뜨지 않게 nogui 옵션을 주면 해결된다.<br/>
+<span class="command"/>java -Xms1024M -Xms1024M -jar server.jar nogui</span><br/>
+<h3>Spigot Watchdog Thread/ERROR</h3>
+<img src="centos-spigot-error.png"/>
+CentOS 7에서 Spigot 1.16 이상 버전의 서버를 닫을 때 많은 에러를 뿜으며 닫힌다.<br/>
+그래서 닫는 시간이 매우 오래 걸리며, 하위 버전이나 바닐라 서버에서는 문제없이 잘 닫힌다.<br/>
+하지만 바닐라 서버도 에러만 뿜지 않을 뿐, Spigot 만큼은 아니더라도 약간 오래 걸리긴 한다.<br/>
+나머지 서버는 실행시키지 않아서 모르겠다.</div>
+
+<h2>JAVA(자바) 설치</h2>
+<div>자바 에디션인 만큼 자바 설치가 필수다.<br/>
+단, 서버를 열지 않을 거라면 자바를 설치할 필요가 없다.<br/>
+옛날엔 서버를 열지 않아도 런처 없이 바로 게임을 실행해야 해서 자바를 따로 설치해야 했지만, 현재는 런처에 내장되어 있는 자바로 게임을 실행한다고 한다.<br/>
+<br/>
+마인크래프트 1.17 이전 버전에서는 JAVA 8을 설치하면 되고, 1.17 이상은 JAVA 16을 설치해야 한다.<br/>
+<span class="command">java -version</span>을 통해 현재 자바의 버전을 확인할 수 있다.<br/>
+<br/>
+Debian/Ubuntu: <span class="command">sudo update-alternatives --config java</span><br/>
+RHEL/Fedora : <span class="command">sudo alternatives --config java</span><br/>
+<br/>
+위 명령어를 입력하면 현재 설치되어 있는 자바의 버전이 2개 이상일 경우 버전을 선택할 수 있는데, 원하는 버전의 Selection 숫자를 입력하면 된다.<br/>
+선택하면 시스템의 자바 버전이 해당 버전으로 바뀐다.<br/>
+<img src="alternatives.png"/>
+<br/>
+만약 원하는 버전이 설치되어 있지 않다면?<br/>
+<a class="linkto" href="/blog/linux/java/"></a></div>
+
+<h2>서버 종류 및 다운로드</h2>
+<div>옛날엔 구동기 하나만 구글링해서 다운로드받으면 서버를 열 수 있었는데 이제는 뭐가 많아졌다.<br/>
+아니 그때는 어려서 뭘 잘 몰랐던 걸 수도 있겠네.. 무려 15살도 되기 전에 했었으니까.<br/>
+지금 찾아보니 서버 종류가 바닐라, Spigot, Paper 등 정말 많다.. 뭐가 뭔지 잘 모르겠다.<br/>
+<br/>
+직접 서버를 열어본 결과, 라즈베리 파이에 잘 맞는 서버 종류는 Paper인 것 같다.<br/>
+서버를 실행하는 방법은 다음 문단에 작성한다.<br/>
+<h3><a href="https://www.minecraft.net/download/server" target="_blank">바닐라</a></h3>
+마인크래프트 회사인 Mojang(모장)에서 개발한 공식 프로그램.<br/>
+플러그인을 사용할 수 없다고 한다. 그래서 단순히 마인크래프트 자체 기능으로만 게임을 즐기고 싶은 경우 사용하기엔 제일 좋다.<br/>
+위 사이트는 공식 사이트지만 최신 버전의 서버만 다운로드할 수 있으며, 마인크래프트 런처에서 바닐라 구 버전을 받을 수 있다고 한다. 찾아보진 않았다.<br/>
+공식 사이트에서 배포된 버전을 모아놓은 <a href="https://getbukkit.org/download/vanilla" target="_blank">비공식 사이트</a>도 있으며, 1.2.5 버전부터 최신 버전까지 있다.<br/>
+<h3>Craftbukkit</h3>
+공식 사이트가 없다. 정확히는 Spigot에 넘겨서 <a href="https://getbukkit.org/download/craftbukkit" target="_blank">Spigot 사이트</a>에서 받을 수 있다고 하는데.. 어디 있는지 못 찾겠다.<br/>
+아마 Spigot에서 설명할 BuildTools.jar를 말하는 것 같긴 하다.<br/>
+<br/>
+<del>바닐라와 마찬가지로 <a href="https://getbukkit.org/download/craftbukkit">비공식 사이트</a>가 있다.<br/>
+바닐라에서 언급한 비공식 사이트와 같은 사이트이며, 1.0.0 버전부터 최신 버전까지 있다.<br/>
+아마 옛날에 내가 찾아서 쓰던 버킷이 이 프로그램인 것 같다.</del><span class="fn" fn="라이선스 위반">Craftbukkit, Spigot의 서버 파일 자체를 배포하는 건 <b>라이선스 위반</b>이라고 한다. 문제가 되기 싫다면 BuildTools.jar로 서버를 받거나 다른 서버를 사용하자. Craftbukkit, Spigot 외 다른 서버는 문제가 없다고 한다.</span><br/>
+<h3><a href="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/" target="_blank">Spigot</a></h3>
+공식 사이트에서 BuildTools.jar 이라는 파일을 배포한다.<br/>
+이 파일을 통해 구 버전 서버부터, 안정화된 최신 버전의 서버에, 현재 개발 중인 서버까지 다운로드할 수 있다.<br/>
+단, 이 파일로 서버를 받을 때 Git을 사용하기 때문에 미리 설치해야 한다.<br/>
+<br/>
+- Debian/Ubuntu: <span class="command">sudo apt-get install -y git</span><br/>
+- RHEL/Fedora 7 이하 : <span class="command">sudo yum install -y git</span><br/>
+- RHEL/Fedora 7 이상 : <span class="command">sudo dnf install -y git</span><br/>
+<br/>
+<span class="command">java -Xms1024M -Xmx1024M -jar BuildTools.jar</span>를 입력하면 현재 디렉토리에 안정적인 최신 버전의 서버를 받을 수 있다.<br/>
+구 버전이나 개발 중인 버전을 받으려면 <span class="command">java -Xmx1024M -Xmx1024M -jar BuildTools.jar --rev 0.0.0</span>에서 0.0.0을 원하는 버전으로 수정하면 된다.<br/>
+<br/>
+<del>그리고.. 역시 <a href="https://getbukkit.org/download/spigot">비공식 사이트</a>가 있다. 두 번이나 언급한 그 사이트 맞다. 1.4.6 버전부터 최신 버전까지 있다.<br/>
+BuildTools.jar는 파일 하나로 특정 버전의 서버를 받을 때 생성되는 spigot.jar 파일이 위 비공식 사이트에 있는 파일들이다.<br/>
+개인적으로 그냥 비공식 서버에서 받는 게 더 나은 것 같다.</del><span class="fn" fn="라이선스 위반"></span><br/>
+<h3><a href="https://papermc.io/downloads" target="_blank">Paper</a></h3>
+위 링크로 이동하면 현재 최신 버전이 있고, 한 단계 낮은 마이너 버전 중 최신 버전이 있다.<br/>
+왼쪽에 있는 구름모양을 클릭하면 다운로드할 수 있다.<br/>
+구 버전은 페이지 제일 아래 LEGACY 버튼을 누르면 보인다. 역시 마이너 버전별 최신 버전만 받을 수 있다.<br/>
+적어 놓은 모든 서버를 사용해본 결과 이게 제일 나은 것 같다.</div>
+
+<h2>서버 열기</h2>
+<div>위에서 다운로드한 서버 파일이 있는 디렉토리에서 아래 명령어를 입력하면 서버가 열린다.<br/>
+<span class="command">sudo java -Xms1024M -Xms1024M -jar [Filename].jar</span><br/>
+여기서 [Filename].jar은 다운로드한 파일명을 입력하면 된다.<br/>
+위 명령어를 사용하면 서버가 열린 후 알아서 닫기는데, 해당 디렉토리를 보면 eula.txt 파일이 생겼다.<br/>
+파일 내용 중 <span class="command">eula=false</span>를 <span class="command">eula=true</span>로 바꿔주고 다시 위 명령어를 입력하면 된다. 사용 약관에 동의하는 것과 같다.</div>
+
+<h2>서버 열어놓고 원격접속 로그아웃 하기</h2>
+<div>하지만 나는 라즈베리 파이를 원격 접속으로 사용하기 때문에, 로그아웃을 해도 프로그램이 계속 돌아가도록 만들고 싶다.<br/>
+위 방법으로 서버를 열거나 뒤에 &를 붙여서 백그라운드로 실행한다 해도 원격 접속을 로그아웃하면 서버도 그냥 닫힌다.<br/>
+그래서 프로그램을 데몬처럼 실행시켜주는 <span class="command">nohup</span> 명령어를 사용하면 간단하게 해결된다.<br/>
+<br/>
+<span class="command">sudo nohup java -Xms1024M -Xms1024M -jar [Filename].jar &</span><br/>
+이 명령어를 입력하고 나면 해당 디렉토리에 <span class="command">nohub.out</span> 이라는 파일이 생기는데, 서버가 실행되는 동안 출력되는 모든 로그를 해당 파일에 기록한다.<br/>
+<br/>
+한 가지 단점은, 서버 프로그램에서 명령어를 입력하지 못한다는 것.<br/>
+op를 가진 유저는 게임 내에서 서버 명령어를 사용할 수 있으므로, 서버 명령어를 사용하고 싶다면 <span class="command">nohub</span> 없이 서버를 열고 서버 프로그램에 <span class="command">op yellowgreen</span>과 같이 입력해서 원하는 계정에 op를 주면 된다.<br/>
+참고로 op는 리눅스로 치면 슈퍼유저(sudo)와 같은 개념이며, op를 뺏는 명령어는 deop다.</div>
+
+<h2>서버 닫기</h2>
+<div><h3>정석으로 닫기</h3>
+서버 프로그램에서 <span class="command">stop</span>을 입력하거나, 게임 내에서 op 권한을 가진 유저가<span class="command">/stop</span>을 입력하면 서버가 닫힌다.<br/>
+<h3>리눅스에서 명령어로 닫기</h3>
+리눅스 터미널에서 <span class="command">pe -ef | grep java</span>를 입력하면 'java'라는 단어가 들어간 명령어를 실행하고 있는 프로세스들이 출력된다.<br/>
+<img src="kill.png"/>
+그중 제일 아래에 뜨는 <span class="command">grep --color=auto java</span>는 방금 입력한 명령어 값이므로 무시.<br/>
+그리고 나머지 결과 중 서버를 실행하기 위해 입력했던 명령어를 찾아서 PID<span class="fn">프로세스 식별자로 위 사진상 드래그한 부분이다.</span>를 <span class="command">sudo kill -15 5955</span>처럼 드래그해 놓은 부분의 숫자를 입력해주면 된다.<br/>
+<span class="command">nohub.out</span> 파일을 확인해 보면 제대로 저장된 것을 알 수 있다.<br/>
+<br/>
+<span class="command">kill -15</span> 명령어는 입력한 프로세스를 정상적으로 종료시켜주는 명령어이며, <span class="command">kill -9</span> 명령어는 즉시 종료시키는 강제 종료 명령어다.<br/>
+즉, <span class="command">kill -9</span> 명령어로 서버를 닫을 경우, 그동안 플레이한 내용이 저장되지 않는다.</div>
+
+
+
+
+
+</body>
+</html>
