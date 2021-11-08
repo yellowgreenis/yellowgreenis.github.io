@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>[라즈베리 파이] 정보 및 구매 | yellowgreen</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial=1, user-scalable=yes"/>
+	<meta name="author" content="yellowgreen"/>
+	<meta name="keyword" content="yellowgreen, 연두, blog, 블로그, Raspberry Pi 4B, 라즈베리 파이 4B, ICE Tower, ICE 타워"/>
+	<meta name="description" content="초소형 초저가 컴퓨터인 라즈베리 파이"/>
+	<meta property="og:title" content="[라즈베리 파이] 정보 및 구매"/>
+	<meta property="og:description" content="초소형 초저가 컴퓨터인 라즈베리 파이"/>
+	<meta property="og:url" content="https://yellowgreen.ddns.net/blog/raspberrypi/"/>
+	<meta property="og:image" content="https://yellowgreen.ddns.net/media/opengraph.png"/>
+	<meta property="og:type" content="blog"/>
+	<link rel="canonical" href="https://yellowgreen.ddns.net/blog/raspberrypi/">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+	</style>
+	<script type="text/javascript" src="/data/jquery.js"></script>
+	<script type="text/javascript" src="/js/index.js"></script>
+	<script type="text/javascript" src="/js/writing.js"></script>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+
+
+
+
+
+<h1>[라즈베리 파이] 정보 및 구매</h1>
+<div id="writingday">2021.06.02</div>
+
+<div>우리 집에 10년 묵은 컴퓨터를 놓아주고 새로 하나 장만하기 위해 알아보는 중 라즈베리 파이를 발견했다.</div>
+
+<h2>Raspberry Pi(라즈베리 파이)?</h2>
+<div>라즈베리 파이는 교육을 목적으로 개발한 초소형 초저가 컴퓨터다.<br/>
+하지만 가격도 저렴하고 성능도 좋다 보니 교육용이 아닌 개인 컴퓨터로 쓰는 <del>나 같은</del> 사람들이 점점 많아지고 있다.<br/>
+라즈베리 파이의 원래 목적인 AI, IoT 등의 공부도 하고는 싶지만, 필요한 물건들이 많고 귀찮고 하니 그냥 일단 서버용으로 살 예정이다.<br/>
+당연한 거지만 고사양 게임을 돌릴 만큼의 성능은 아니다. 그래도 마인크래프트는 공식으로 지원도 되<del>었</del>고<span class="fn">개발이 중단되었으며, 최종 버전이 0.1.1이다..</span> 돌아가긴 한다더라.</div>
+
+<h2>초소형 초저가 저전력</h2>
+<div><h3>초소형</h3>
+대부분 신용카드 크기 정도 되며, <a href="https://www.raspberrypi.org/products/raspberry-pi-400-unit/" title="Raspberry Pi 400">라즈베리 파이가 탑재된 키보드</a>도 있다.<br/>
+라즈베리 파이와 해당 모델의 전원 공급에 맞는 보조배터리만 들고 다니면 어디서든 사용할 수 있다.<br/>
+라즈베리 파이 4B는 하위 모델보다 발열이 꽤 심하다고 하니 들고 다니기엔 무리일 수도.. 물론 난 그럴 생각도 없다.<br/>
+<h3>초저가</h3>
+현재 출시된 모델 중 제일 비싼 게 '라즈베리 파이 4B 8GB<span class="fn">RAM 용량</span>' 모델이며 가격은 75달러다.<br/>
+라즈베리 파이 4B는 8GB 말고도 2GB, 4GB도 있다. 35달러였던 1GB는 단종.<br/>
+이 가격에 기가비트 이더넷, 5GHz 와이파이, 블루투스 5.0 모두 탑재되어 있으며, 듀얼 모니터까지 사용할 수 있다. <br/>
+그리고 제일 싼 모델이 겨우 5달러인 '라즈베리 파이 제로'.<span class="fn">4달러인 '라즈베리 파이 Pico'는 컴퓨터가 아니다.</span><br/>
+<h3>저전력</h3>
+라즈베리 파이 4B는 전원 공급에 5V 3A 이상의 어댑터 사용이 권장된다.<br/>
+5V 3A 짜리 어댑터를 사용한다고 항상 5V 3A로 출력하는 게 아닌, 필요한 만큼만 출력된다.<br/>
+그래서 많은 전력을 쓰지 않는다면 더 낮은 어댑터를 사용해도 되긴 하나, 만약 전력이 부족해질 경우<span class="fn">전력이 부족하면 화면(GUI) 우측 상단에 번개 모양이 표시되며, 라즈베리 파이 본체의 빨간색 LED가 꺼진다. 또는 <span class="command">cat /sys/devices/platform/leds/leds/led1/brightness</span> 값이 0으로 바뀐다. 정상일 경우 255.</span> CPU 성능이 떨어진다.<br/>
+어찌저찌 24시간 한 달 내내 5V 3A를 사용한다고 해도 최대 11.16kwh<span class="fn">5V * 3A * 24h * 31 = 11160wh</span>밖에 안 나온다.<br/>
+12kwh로 잡고 <a href="https://cyber.kepco.co.kr/ckepco/front/jsp/CY/J/A/CYJAPP000NFL.jsp" title="전기 요금 계산기 - cyber.kepco.co.kr">누진세</a>(2021년 기준, 주택용 저압)까지 합쳐도 0~200kwh 구간에서는 1240원, 201~400kwh 구간에서는 2530원, 401kwh부터는 3800원 정도 나온다.<br/>
+전원 공급도 덜 받고 누진세도 덜 받는다면 24시간 한 달 내내 켜놓고도 1000원도 안 나올 수 있다.<br/>
+<br/>
+실제로 웹서버인 아파치와 미디어 서버인 Jellyfin<span class="fn">+ 트렌스코딩</span>을 몇 달 내내 계속 켜놓았는데, 오히려 전년도 동월보다 더 적게 나온 달도 있을 정도로 전기 사용량이 매우 적다.</div>
+
+<h2>필요한 준비물</h2>
+<div><h3>필수</h3>
+- 라즈베리 파이<br/>
+- SD카드 및 리더기<span class="fn">라즈베리 파이는 기본적으로 SD카드에 리눅스를 설치한 후 부팅한다. USB나 SSD/HDD로 부팅할 경우에도 초기 설정을 위해 사용해야 한다.</span><br/>
+- 5V 3A 이상 어댑터 및 C 타입 케이블<span class="fn">라즈베리 파이 4B 기준이며, 하위 모델은 1A~2A 이상 어댑터 및 5핀을 사용한다.</span><br/>
+<h3>필수 (원격접속으로 사용할 경우 선택)</h3>
+- 모니터 및 라즈베리 파이와 모니터를 연결할 케이블 또는 젠더<br/>
+- 마우스<br/>
+- 키보드<br/>
+<h3>선택</h3>
+- 쿨러<span class="fn">선택이지만 4B의 경우 다른 모델에 비해 발열이 꽤 심해서 사용하는 걸 추천.</span><br/>
+- USB 또는 SSD/HDD<span class="fn">수명이 짧은 SD카드 대신 USB나 SSD/HDD에 리눅스를 설치한 후 사용할 수 있다.</span><br/>
+- LAN 케이블<br/>
+<br/>
+뭐 이 외에도 스피커나 USB 허브와 같은 주변기기들은 알아서 하면 된다.</div>
+
+<h2>그 외 정보</h2>
+<div>역시 라즈베리 파이 4B 기준이다.<br/>
+- 라즈베리 파이 전용 OS가 있다. (구 라즈비안 / 현 라즈베리 파이 OS)<br/>
+- ARM CPU를 사용하기 때문에 ARM 기반 OS를 사용해야 한다.<br/>
+- 기가비트 이더넷 / 블루투스 5.0 / 와이파이 5 (2.4GHz & 5GHz, IEEE 802.11ac, Dual-Band)가 탑재되어 있다.<br/>
+- USB 포트는 총 4개로, 버전 2와 3이 2개씩 있다.<br/>
+- 이전 모델과는 다르게 전원 공급 단자가 5핀이 아닌 C 타입이다.<br/>
+- 이전 모델과는 다르게 HDMI 포트가 아닌 Micro HDMI이며, 2개다.<br/>
+- GPIO(General Purpose Input Output)를 사용할 수 있다.<br/>
+- 7인치 짜리 <a href="https://www.raspberrypi.org/products/raspberry-pi-touch-display/">라즈베리 파이 전용 터치 디스플레이</a>도 있다. 가격이 라즈베리 파이 4B 4~8GB 사이.</div>
+
+<h2>2021.06.08</h2>
+<div>사버렸다..
+<img src="/media/raspberrypi/Raspberry_Pi_4B.jpg"/>
+<h3>구매 내역</h3>
+- Raspberry Pi 4B 8GB<br/>
+- Micro HDMI to HDMI Cable<br/>
+- HDMI to DVI Gender<br/>
+- SD Card <del>8GB</del> 64GB<br/>
+- ICE Tower<br/>
+나머지는 집에 있는 걸로 사용.<br/>
+<br/>
+원래 컴퓨터를 하나 사려다가 라즈베리 파이로 바꾼 거라 가격이 너무 싸지는 바람에 제일 좋은 모델에 제일 성능 좋은 쿨러까지 사버렸다.<br/>
+SD카드는 8GB 짜리를 사려고 했으나 쿠팡 로켓배송이 없어서 64GB로 사버렸다. <del>두 배도 아니고 제곱이다 제곱.</del><br/>
+ICE Tower(쿨링팬)는 사진과 달리 눕혀져 있는(케이스에 넣을 수 있는) LP(Low Profile) 버전도 있지만, 그냥 케이스는 포기하고 성능 더 좋은 애로 사버렸다.<br/>
+위 사진의 ICE Tower에 맞는 케이스를 찾았지만, 해외 배송이라 최소 2주에서 최대 1달 반 걸린다길래 이건 안 사버렸다. <del>먼지는 많이 쌓이겠다.</del></div>
+
+<div id="linkto">
+	<a class="linkto" href="/blog/raspberrypi/os/" to="next"></a>
+</div>
+
+
+
+
+
+</body>
+</html>
