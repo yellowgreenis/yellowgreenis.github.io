@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>[라즈베리 파이] 다른 기기로 원격접속하기 (SSH, VNC, XRDP) | yellowgreen</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial=1, user-scalable=yes"/>
+	<meta name="author" content="yellowgreen"/>
+	<meta name="keyword" content="yellowgreen, 연두, blog, 블로그, Raspberry Pi 4B, 라즈베리 파이 4B, SSH, VNC, XRDP, 원격 접속"/>
+	<meta name="description" content="다른 컴퓨터로 라즈베리 파이 OS에 원격접속 하기"/>
+	<meta property="og:title" content="[라즈베리 파이] 다른 기기로 원격접속하기 (SSH, VNC, XRDP)"/>
+	<meta property="og:description" content="다른 컴퓨터로 라즈베리 파이 OS에 원격접속 하기"/>
+	<meta property="og:url" content="https://yellowgreen.ddns.net/blog/raspberrypi/setting/remote/"/>
+	<meta property="og:image" content="https://yellowgreen.ddns.net/media/opengraph.png"/>
+	<meta property="og:type" content="blog"/>
+	<link rel="canonical" href="https://yellowgreen.ddns.net/blog/raspberrypi/setting/remote/">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+	</style>
+	<script type="text/javascript" src="/data/jquery.js"></script>
+	<script type="text/javascript" src="/js/index.js"></script>
+	<script type="text/javascript" src="/js/writing.js"></script>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+
+
+
+
+
+<h1>[라즈베리 파이] 다른 기기로 원격접속하기 (SSH, VNC, XRDP)</h1>
+<div id="writingday">2021.06.15</div>
+<div id="notice">
+	<p><b>Raspberry Pi 4B</b>, <b>Raspberry Pi OS</b> 기준으로 작성했습니다.</p>
+</div>
+
+<div><span id="intro">라즈베리 파이를 모니터 없이 사용하려면 원격 접속이 필수다.<br/>
+SSH를 이용한 원격 접속(CLI)과 VNC, XRDP를 이용한 원격 접속(GUI)이 있다.</span><br/>
+<br/>
+원격 접속을 하려면 라즈베리 파이의 IP 주소를 알아야 한다.<br/>
+같은 와이파이 또는 모뎀에 연결되어 있어야 안전하게 접속할 수 있다.<br/>
+라즈베리 파이에서 <span class="command">hostname -I</span><span class="fn">i의 대문자</span>를 입력하면 현재 IP 주소가 출력된다.<br/>
+모니터가 연결되어 있지 않다면, 공유기나 모뎀 설정 페이지(ex. 192.168.0.1)에 들어간 후 접속 정보에서 라즈베리 파이의 접속을 연결, 해제하며 알아낼 수 있다.<br/>
+<br/>
+여기서는 라즈베리 파이 IP를 192.168.0.10으로 가정.</div>
+
+<h2>SSH</h2>
+<div>그래픽이 없는 CLI 접속이다. 리눅스 명령어를 사용하는 게 익숙하지 않다면 사용하지 말 것.<br/>
+<br/>
+먼저 OS를 설치할 때 빈 ssh 파일을 생성하지 않았다면<br/>
+<span class="command">sudo raspi-config</span> --> 'Interface Options' --> 'SSH' --> 'Yes'<br/>
+로 설정해야 원격 접속을 할 수 있다.<br/>
+<br/>
+<span class="command">sudo vi /etc/ssh/sshd_config</span>를 입력해 설정 파일을 연다.<br/>
+- <span class="command">PermitRootLogin no</span> : root 계정의 원격 접속을 막는다는 뜻이다. 허용하려면 yes.<br/>
+- <span class="command">AllowUsers user1 user2</span> : users, user2 계정으로만 원격 접속을 할 수 있다.<br/>
+- <span class="command">DenyUsers user1 user2</span> : user1, user2 계정의 원격 접속을 막는다.<br/>
+<span class="command">AllowUsers</span>, <span class="command">DenyUsers</span>는 기본적으로 설정되어 있지 않으니 맨 아래에 추가하면 된다.<br/>
+<br/>
+이제 터미널(Linux, macOS, 스마트폰<span class="fn">Turmux와 같은 앱을 사용하면 된다.</span>) 또는 cmd(Windows)<span class="fn">(Windows 10 기준) 설정 --> 앱 --> 앱 및 기능 --> 선택적 기능 --> 기능 추가 --> OpenSSH 클라이언트 설치 후 재부팅을 해야 사용할 수 있다.</span>에서 <span class="command">ssh pi@192.168.0.10</span><span class="fn">SSH 접속 포트 번호를 1234로 변경했을 경우, 뒤에 <span class="command">-p 1234</span>를 추가로 붙이면 된다.</span>과 같이 입력 후 해당 계정의 패스워드를 입력하면 접속할 수 있다.<br/>
+처음 접속할 때 yes/no 입력하는 게 뜨는데, 당연히 yes.<br/>
+<br/>
+라즈베리 파이에 OS를 다시 설치하거나 하는 등의 이유로 계정 정보가 변경되었다면 접속 시 에러가 나는데, <span class="command">ssh-keygen -R 192.168.0.10</span> 입력 후 다시 접속하면 된다. 이때 주소 앞에 'pi@' 와 같은 계정 명은 입력하지 않는다.<br/>
+<br/>
+<span class="command">exit</span>을 입력하면 접속이 종료된다.</div>
+
+<h2>VNC, XRDP</h2>
+<div>그래픽이 있는 GUI 접속이다.<br/>
+<br/>
+VNC 기능을 켜줘야 원격 접속을 할 수 있다.<br/>
+<span class="command">sudo raspi-config</span> --> 'Interface Options' --> 'VNC' --> 'Yes'<br/>
+<br/>
+Windows의 기본기능으로 접속하려면 XRDP 설치<br/>
+<span class="command">sudo apt-get install -y xrdp</span><br/>
+<br/>
+그리고 원격 접속에서 사용할 그래픽 해상도를 설정해야 한다.<br/>
+<span class="command">sudo raspi-config</span> --> 'Display Options' --> 'Resolution' --> 사용할 해상도 선택.<br/>
+여기서 CEA는 TV나 프로젝터를, DMT는 일반적인 모니터를 사용할 때 선택.<br/>
+선택 후 나가면 재부팅을 유도하는데 일단 No.<br/>
+<br/>
+OS나 OS Full 버전은 여기까지 하면 되는지 모르겠지만, OS Lite의 경우 하나 더 설치해야 한다.<br/>
+<span class="command">sudo apt-get install -y lxsession</span><br/>
+이제 <span class="command">sudo reboot</span>로 재부팅한다.<br/>
+<br/>
+이제 스마트폰이나 PC에서 <a href="https://www.realvnc.com/en/connect/download/viewer/">VNC Viewer</a> 프로그램을 운영체제에 맞게 설치하여 192.168.0.10:5900로 접속하면 된다.<br/>
+Windows의 경우 <span class="command">xrdp</span>를 설치했다면 기본기능인 '원격 데스크톱 연결'을 사용해서 접속할 경우, 192.168.0.10<span class="fn"><span class="command">xrdp</span> 기본 포트인 3389 생략</span>로 접속하면 된다.<br/>
+.<br/>
+.<br/>
+.<br/>
+OS Lite에 설정하여 접속하니 라즈베리 파이 그래픽 버전을 설치했을 때랑 GUI가 다르다. 불편하다. 난 안 쓰련다.<br/>
+OS나 OS Full 버전을 설치했을 경우엔 같은 GUI로 나온다.</div>
+
+<div id="linkto">
+	<a class="linkto" href="/blog/raspberrypi/setting/" to="prev"></a>
+</div>
+
+
+
+
+
+</body>
+</html>
