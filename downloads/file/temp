@@ -1,14 +1,30 @@
 #!/bin/bash
 
+u=`id -u`
+if [ "$u" == 0 ]; then
+	p=/
+else
+	p=~/
+fi
+
 while :
 do
-	cpu=`sudo vcgencmd measure_temp`
-	cpu="${cpu#*=}"
-	gpu=`cat /sys/devices/virtual/thermal/thermal_zone0/temp`
-	gpu=`echo "$gpu" | rev | cut -b 4- | rev`.`echo "$gpu" | rev | cut -b -3 | rev`\'C
+	d=`date '+%Y.%m.%d %H:%M:%S'`
 
-	out="`date '+%Y.%m.%d %H:%M:%S'` Temperature | CPU : $cpu | GPU : $gpu"
-	echo "$out" | sudo tee -a ~/temp.out
+	g=`cat /sys/devices/virtual/thermal/thermal_zone0/temp`
+	g=" | GPU : "`echo "$g" | rev | cut -b 4- | rev`\'C
+
+	c=""
+	if [ "$u" == 0 ]; then
+		c=`vcgencmd measure_temp`
+		c=" | CPU : ${c#*=}"
+	fi
+
+	o="$d$g$c"
+
+
+
+	echo "$o" | tee -a ${p}temp.out
 
 	sleep 3
 done
